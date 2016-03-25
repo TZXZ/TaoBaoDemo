@@ -17,7 +17,7 @@
                BlueprintIdentifier = "84FC59851C51CF5400E6512B"
                BuildableName = "TaoBaoDemoZ.app"
                BlueprintName = "TaoBaoDemoZ"
-               ReferencedContainer = "container:TaoBaoDemoZ.xcodeproj">
+               ReferencedContainer = "container:TaoBaoDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "84FC59851C51CF5400E6512B"
             BuildableName = "TaoBaoDemoZ.app"
             BlueprintName = "TaoBaoDemoZ"
-            ReferencedContainer = "container:TaoBaoDemoZ.xcodeproj">
+            ReferencedContainer = "container:TaoBaoDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "84FC59851C51CF5400E6512B"
             BuildableName = "TaoBaoDemoZ.app"
             BlueprintName = "TaoBaoDemoZ"
-            ReferencedContainer = "container:TaoBaoDemoZ.xcodeproj">
+            ReferencedContainer = "container:TaoBaoDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,7 +77,7 @@
             BlueprintIdentifier = "84FC59851C51CF5400E6512B"
             BuildableName = "TaoBaoDemoZ.app"
             BlueprintName = "TaoBaoDemoZ"
-            ReferencedContainer = "container:TaoBaoDemoZ.xcodeproj">
+            ReferencedContainer = "container:TaoBaoDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
