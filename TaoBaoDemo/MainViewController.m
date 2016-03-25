@@ -8,6 +8,8 @@
 
 #import "MainViewController.h"
 #import "SLHomeTableViewCell.h"
+#import "SLHomeSecondCell.h"
+#import "SLSectionHeadView.h"
 
 #define WL self.view.frame.size.width
 #define HL self.view.frame.size.height
@@ -60,7 +62,7 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.tableView];                          //向self.view 中添加self.tableView
     //初始化tableView 的表头视图 (self.viewForTableHeadView)
-    self.viewForTableHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WL, WL * 0.3 + 150 + 60)];
+    self.viewForTableHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WL, WL * 0.3 + 150 + 60 + 10 + 160)];
     self.tableView.tableHeaderView = self.viewForTableHeadView;          //将自定义的tableHeadView 赋给真正的tableHeadView
     
     //初始化滚动广告
@@ -122,6 +124,12 @@
     [self.viewForRotatingNews addSubview:self.imageViewNews];                 //将右边的imageView 添加到新闻滚动视图上面去
     [self.viewForTableHeadView addSubview:self.viewForRotatingNews];          //将新闻滚动视图添加到表头视图上面去
     
+    //初始化表头视图中的最下面的一块视图
+    UIView *graySpace = [[UIView alloc] initWithFrame:CGRectMake(0, WL * 0.3 + 150 + 60, WL, 10)];
+    graySpace.backgroundColor = [UIColor colorWithRed:245/255.0 green:246/255.0 blue:247/255.0 alpha:1];
+    [self.viewForTableHeadView addSubview:graySpace];              //添加灰色部分，美化
+    SLSectionHeadView *headViewLast = [[SLSectionHeadView alloc] initWithFrame:CGRectMake(0, WL * 0.3 + 150 + 60 + 10, WL, 160)];
+    [self.viewForTableHeadView addSubview:headViewLast];            //添加最后部分视图
 }
 
 
@@ -143,6 +151,14 @@
 {
     [self.whView shouldAutoShow:YES];
 }
+
+
+#pragma mark -- WHScrollViewViewDelegate
+- (void)didClickPage:(WHScrollAndPageView *)view atIndex:(NSInteger)index
+{
+    NSLog(@"点击了滚动广告的第%ld页",(long)index);
+}
+
 
 #pragma mark -- 10个按钮的组合事件
 - (void)tenButtonAction:(UIButton *)sender
@@ -226,7 +242,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
+    if (indexPath.section == 0)      //第一个Section 中的cell初始化及加入队列
     {
         static NSString *cellID = @"SectionZero";
         SLHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
@@ -247,7 +263,22 @@
         
         return cell;
     }
-    else if (indexPath.section == 2)
+    
+    else if (indexPath.section == 1)    //第二个Section 中的cell初始化及加入队列
+    {
+        static NSString *cellID = @"SectionOne";
+        SLHomeSecondCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        if (cell == nil)
+        {
+            cell = [SLHomeSecondCell alloc];
+            cell.widthLength = WL;
+            cell = [cell initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        
+        return cell;
+    }
+    
+    else if (indexPath.section == 2)    //第三个Section 中的cell初始化及加入队列
     {
         static NSString *cellID = @"SectionTwo";
         SLHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
@@ -275,7 +306,36 @@
         cell.label8_2.text = @"找新品戳我";
         cell.imageViewHead.image = [UIImage imageNamed:@"good_goods.png"];
         cell.labelHead.text = @"特色好货";
-        cell.labelHead.textColor = [UIColor colorWithRed:65/255.0 green:119/255.0 blue:255/255.0 alpha:1];
+        cell.labelHead.textColor = [UIColor colorWithRed:66/255.0 green:218/255.0 blue:255/255.0 alpha:1];
+        
+        return cell;
+    }
+    
+    else if (indexPath.section == 3)           //第四个Section 中的cell初始化及加入队列
+    {
+        static NSString *cellID = @"SectionFour";
+        SLHomeSecondCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        if (cell == nil)
+        {
+            cell = [SLHomeSecondCell alloc];
+            cell.widthLength = WL;
+            cell = [cell initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        cell.imageViewHead.image = [UIImage imageNamed:@"hot_part.png"];
+        cell.labelHead.text = @"热门市场";
+        cell.labelHead.textColor = [UIColor greenColor];
+        cell.label1_1.text = @"美食";
+        cell.label1_2.text = @"春游也要吃";
+        cell.label2_1.text = @"数码";
+        cell.label2_2.text = @"潮流新奇特";
+        cell.label3_1.text = @"汽车";
+        cell.label3_2.text = @"春季包养季";
+        cell.label4_1.text = @"家电";
+        cell.label4_2.text = @"送妈妈实用";
+        cell.label5_1.text = @"内衣";
+        cell.label5_2.text = @"性感装备";
+        cell.label6_1.text = @"女装";
+        cell.label6_2.text = @"女神必备";
         
         return cell;
     }
@@ -303,7 +363,10 @@
     return 210.0;
 }
 
-
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
 
 
 @end

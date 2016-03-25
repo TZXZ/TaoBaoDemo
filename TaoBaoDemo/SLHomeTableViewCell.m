@@ -25,7 +25,7 @@
 }
 
 
-#pragma mark --Action I
+#pragma mark -- Action I
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier       //构造方法，在初始化对象的时候会调用
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
