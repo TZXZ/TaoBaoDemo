@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WHScrollAndPageView.h"
 
-@interface MainViewController : UIViewController<WHScrollViewViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface MainViewController : UIViewController<WHScrollViewViewDelegate,UITableViewDataSource,UITableViewDelegate,NSURLSessionDataDelegate>
 
 @property (strong, nonatomic) UIView *viewForTableHeadView;
 @property (strong, nonatomic) UIView *viewForRotatingNews;
@@ -19,5 +19,9 @@
 @property (assign, nonatomic) int numberNewsPage;
 
 @property (strong, nonatomic) WHScrollAndPageView *whView;
+
+@property (strong, nonatomic) NSMutableData *dataResponse;
+@property (strong, nonatomic) NSMutableArray *mutableArrayForImage;
+@property (assign, nonatomic) BOOL couldLoadImage;
 
 @end

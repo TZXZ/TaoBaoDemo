@@ -12,14 +12,12 @@
 //#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-{
-    
-}
 
 
 @property (strong ,nonatomic) UserInfomation *userInfomation;
 @property (strong, nonatomic) UIWindow *window;
 @property (assign, nonatomic) BOOL userHasLogin;
+
 
 
 @end

@@ -57,7 +57,7 @@
         [labelT_T1 setTextAlignment:NSTextAlignmentCenter];
         [_button1 addSubview:labelT_T1];                             //添加第一个黑色冒号
         
-        UIView *blackView2 = [[UIView alloc] initWithFrame:CGRectMake(10 + 22, 60, 19, 20)];
+        UIView *blackView2 = [[UIView alloc] initWithFrame:CGRectMake(10 + 22 + 0.5, 60, 19 - 1, 20)];
         blackView2.backgroundColor = [UIColor blackColor];
         blackView2.layer.cornerRadius = 2;
         blackView2.layer.masksToBounds = YES;

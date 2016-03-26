@@ -10,6 +10,7 @@
 #import "SLHomeTableViewCell.h"
 #import "SLHomeSecondCell.h"
 #import "SLSectionHeadView.h"
+#import "SLHomeSearchButtonView.h"
 
 #define WL self.view.frame.size.width
 #define HL self.view.frame.size.height
@@ -29,8 +30,11 @@
     self.numberNewsPage = 0;
     
     
-    //初始化顶部的toolBar
+//初始化顶部的toolBar及背景图片  和搜索按钮
     UIToolbar *myToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 20, WL, 44)];
+    UIView *viewForToolBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WL, 44)];
+    viewForToolBar.backgroundColor = [UIColor colorWithRed:255/255.0 green:79/255.0 blue:45/255.0 alpha:1];
+    [myToolBar addSubview:viewForToolBar];                    //将背景添加到myToolBar上面去
     //初始化左边的扫一扫按钮
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
     [leftButton setImage:[UIImage imageNamed:@"saoyisao.png"] forState:UIControlStateNormal];
@@ -39,6 +43,7 @@
     leftLabel.text = @"扫一扫";
     [leftLabel setTextAlignment:NSTextAlignmentCenter];
     leftLabel.font = [UIFont systemFontOfSize:9.0];
+    
     //初始化右边的消息按钮
     UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
     [rightButton setImage:[UIImage imageNamed:@"xiaoxi.png"] forState:UIControlStateNormal];
@@ -47,6 +52,12 @@
     rightLabel.text = @"消息";
     [rightLabel setTextAlignment:NSTextAlignmentCenter];
     rightLabel.font = [UIFont systemFontOfSize:9.0];
+    
+    //初始化搜索按钮
+    SLHomeSearchButtonView *SearchButtonView = [[SLHomeSearchButtonView alloc] initWithFrame:CGRectMake(80, 0, WL - 160, 44)];
+    [myToolBar addSubview:SearchButtonView];                 //添加搜索按钮
+    
+    
     //创建一个toolBar 弹簧
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     //设置toolBar 按钮
@@ -55,7 +66,9 @@
     myToolBar.items = @[leftButtonItem,flexibleSpace,rightButtonItem];          //顶部toolBar的布局
     [self.view addSubview:myToolBar];                              //在self.view 中添加toolBar
     
-    //初始化tableView （首页核心视图）
+    
+    
+//初始化tableView （首页核心视图）
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, WL, HL - 64 - 49) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -65,7 +78,7 @@
     self.viewForTableHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WL, WL * 0.3 + 150 + 60 + 10 + 160)];
     self.tableView.tableHeaderView = self.viewForTableHeadView;          //将自定义的tableHeadView 赋给真正的tableHeadView
     
-    //初始化滚动广告
+//初始化滚动广告
     self.whView = [[WHScrollAndPageView alloc] initWithFrame:CGRectMake(0, 0, WL, WL * 0.3)];
     NSMutableArray *mutableArrayImage = [NSMutableArray array];
     for (int i = 0; i < NUM; i ++)
@@ -80,7 +93,7 @@
     self.whView.delegate = self;
     [self.viewForTableHeadView addSubview:self.whView];             //将滚动广告视图添加到self.viewForTableHeadView
     
-    //利用双重循环创建10个Button
+//利用双重循环创建10个Button
     int spaceLength = (WL - 200) / 6;
     NSArray *arrayLabelName = @[@"天猫",@"聚划算",@"天猫国际",@"口碑外卖",@"天猫超市",@"充值中心",@"阿里旅行",@"领金币",@"淘生活",@"分类"];
     int tempY = WL * 0.3 + 10;
@@ -107,29 +120,34 @@
         }
     }
     
-    //初始化淘宝头条新闻滚动视图（self.viewForRotatingNews）、线条、右边的imageView
+//初始化淘宝头条新闻滚动视图（self.viewForRotatingNews）、线条、右边的imageView
     self.viewForRotatingNews = [[UIView alloc] initWithFrame:CGRectMake(0, WL * 0.3 + 150, WL, 60)];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 20, 40, 20)];
     imageView.image = [UIImage imageNamed:@"taobao_toutiao.png"];
     [self.viewForRotatingNews addSubview:imageView];                  //添加头条到新闻滚动视图上面去
     UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(10, 0, WL - 20, 1)];
-    topLine.backgroundColor = [UIColor grayColor];
+    topLine.backgroundColor = [UIColor colorWithRed:228/255.0 green:228/255.0 blue:230/255.0 alpha:1];
     [self.viewForRotatingNews addSubview:topLine];                   //添加顶部线条到新闻滚动视图
     UIView *rightLine = [[UIView alloc] initWithFrame:CGRectMake(99, 15, 1, 30)];
-    rightLine.backgroundColor = [UIColor grayColor];
-    //[self.viewForRotatingNews addSubview:rightLine];                 //添加右边线条到新闻滚动视图里面去
+    rightLine.backgroundColor = [UIColor colorWithRed:228/255.0 green:228/255.0 blue:230/255.0 alpha:1];
+    [self.viewForRotatingNews addSubview:rightLine];                 //添加右边线条到新闻滚动视图里面去
     self.imageViewNews = [[UIImageView alloc] initWithFrame:CGRectMake(120, 5, WL - 100 - 20 - 20, 50)];
     [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(startRotatingNews) userInfo:nil repeats:YES];
     self.imageViewNews.image = [UIImage imageNamed:@"rotating_news_0.png"];
     [self.viewForRotatingNews addSubview:self.imageViewNews];                 //将右边的imageView 添加到新闻滚动视图上面去
     [self.viewForTableHeadView addSubview:self.viewForRotatingNews];          //将新闻滚动视图添加到表头视图上面去
     
-    //初始化表头视图中的最下面的一块视图
+//初始化表头视图中的最下面的一块视图
     UIView *graySpace = [[UIView alloc] initWithFrame:CGRectMake(0, WL * 0.3 + 150 + 60, WL, 10)];
     graySpace.backgroundColor = [UIColor colorWithRed:245/255.0 green:246/255.0 blue:247/255.0 alpha:1];
     [self.viewForTableHeadView addSubview:graySpace];              //添加灰色部分，美化
     SLSectionHeadView *headViewLast = [[SLSectionHeadView alloc] initWithFrame:CGRectMake(0, WL * 0.3 + 150 + 60 + 10, WL, 160)];
     [self.viewForTableHeadView addSubview:headViewLast];            //添加最后部分视图
+    
+//开始网络请求图片数据
+    [self getImageForButtons];
+    self.mutableArrayForImage = [[NSMutableArray alloc] init];
+    self.couldLoadImage = NO;         //改值判断能否加载图片
 }
 
 
@@ -261,6 +279,14 @@
         cell.label7_2.textColor = [UIColor redColor];
         cell.label8_2.textColor = [UIColor redColor];
         
+        //判断是否有图片数据，有的话就加载，没有就忽略
+        if (_couldLoadImage)
+        {
+            [cell.button1 setImage:[_mutableArrayForImage objectAtIndex:0] forState:UIControlStateNormal];
+            [cell.button2 setImage:[_mutableArrayForImage objectAtIndex:1] forState:UIControlStateNormal];
+            [cell.button3 setImage:[_mutableArrayForImage objectAtIndex:2] forState:UIControlStateNormal];
+        }
+        
         return cell;
     }
     
@@ -367,6 +393,103 @@
 {
     return NO;
 }
+
+
+#pragma mark -- 从服务器获取商品图片 相关方法
+- (void)getImageForButtons
+{
+    
+    //NSOperationQueue *someQueue = [[NSOperationQueue alloc] init];
+        for (int i = 0; i < 3; i ++)
+        {
+            //1.确定请求路径
+            NSString *strURL = [NSString stringWithFormat:@"http://localhost/image%d.png",i];
+            NSURL *url = [NSURL URLWithString:strURL];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURLSession *session = [NSURLSession sharedSession];
+            
+            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+            {
+                NSLog(@"当前线程为 %@",[NSThread currentThread]);
+                UIImage *image = [UIImage imageWithData:data];
+                [self.mutableArrayForImage addObject:image];
+                NSLog(@"我有加载好过吗");
+            }];
+            
+            //5.执行任务
+            [dataTask resume];
+        }
+    
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(watchingForSession:) userInfo:nil repeats:YES];
+    
+}
+
+- (void)watchingForSession:(NSTimer *)timer
+{
+    NSLog(@"我到底有出现过吗");
+    
+    if (_mutableArrayForImage.count == 3)
+    {
+        NSLog(@"数据请求完成,我要开始行动");
+        [timer invalidate];
+        [NSThread sleepForTimeInterval:1];
+        _couldLoadImage = YES;
+        [self.tableView reloadData];
+    }
+    
+}
+
+
+//NSURLSessionDelegate
+//1.接收到服务器响应的时候调用该方法
+//- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
+//{
+//    //在该方法中可以得到响应头信息，即response
+//    NSLog(@"didReceiveResponse--%@",[NSThread currentThread]);
+//    self.dataResponse = [[NSMutableData alloc] init];
+//    self.mutableArrayForImage = [[NSMutableArray alloc] init];
+//    
+//    //注意：需要使用completionHandler回调告诉系统应该如何处理服务器返回的数据
+//    //默认是取消的
+//    /*
+//     NSURLSessionResponseCancel = 0,        默认的处理方式，取消
+//     NSURLSessionResponseAllow = 1,         接收服务器返回的数据
+//     NSURLSessionResponseBecomeDownload = 2,变成一个下载请求
+//     NSURLSessionResponseBecomeStream        变成一个流
+//     */
+//    
+//    completionHandler(NSURLSessionResponseAllow);
+//}
+//
+////2.接收到服务器返回数据的时候会调用该方法，如果数据较大那么该方法可能会调用多次
+//- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+//{
+//    NSLog(@"didReceiveData--%@",[NSThread currentThread]);
+//    
+//    //拼接服务器返回数据
+//    [self.dataResponse appendData:data];
+//}
+//
+////3.当请求完成（成功|失败）的时候会调用该方法，如果请求失败，则有error值
+//- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+//{
+//    NSLog(@"didCompleteWithError--%@",[NSThread currentThread]);
+//    
+//    if(error == nil)
+//    {
+//        //解析数据,JSON解析请参考http://www.cnblogs.com/wendingding/p/3815303.html
+//        UIImage *image = [UIImage imageWithData:self.dataResponse];
+//        [self.mutableArrayForImage addObject:image];
+//        
+//        NSLog(@"请求成功了");
+//        
+//    }else
+//    {
+//        NSLog(@"好像失败了");
+//    }
+//}
+
 
 
 @end
