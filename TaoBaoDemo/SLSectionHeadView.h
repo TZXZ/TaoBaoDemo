@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MainViewController;
 
 @interface SLSectionHeadView : UIView
+
+@property (nonatomic, strong) MainViewController *owner;
 
 @property (nonatomic, strong) UIImageView *imageView1_title;
 @property (nonatomic, strong) UIButton *button1;

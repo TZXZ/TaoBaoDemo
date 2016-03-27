@@ -7,6 +7,8 @@
 //
 
 #import "SLSectionHeadView.h"
+#import "SLBuyViewController.h"
+#import "MainViewController.h"
 
 @implementation SLSectionHeadView
 
@@ -42,7 +44,7 @@
         
         _label1_detal = [[UILabel alloc] initWithFrame:CGRectMake(10, 35, 150 - 10, 20)];
         _label1_detal.font = [UIFont systemFontOfSize:12.0];
-        _label1_detal.text = @"老字号百花蜂蜜3瓶";
+        _label1_detal.text = @"纯棉T恤买1送1";
         [_button1 addSubview:_label1_detal];              //添加该button1 的商品介绍
         
         UIView *blackView1 = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 18, 20)];
@@ -121,12 +123,12 @@
         
         _label3_title = [[UILabel alloc] initWithFrame:CGRectMake(10 + 15, 10, (widthLength - 150) / 2 - 25, 15)];
         _label3_title.text = @"爱逛街";
-        _label3_title.font = [UIFont systemFontOfSize:16.0];
+        _label3_title.font = [UIFont systemFontOfSize:15.0];
         _label3_title.textColor = [UIColor colorWithRed:224/255.0 green:25/255.0 blue:255/255.0 alpha:1];
         [_button3 addSubview:_label3_title];               //添加button3的标题
         
         _label3_detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, (widthLength - 150) / 2 - 10, 15)];
-        _label3_detail.font = [UIFont systemFontOfSize:11.0];
+        _label3_detail.font = [UIFont systemFontOfSize:10.0];
         _label3_detail.text = @"可爱的你会喜欢";
         [_button3 addSubview:_label3_detail];                 //添加button3的介绍
         
@@ -142,12 +144,12 @@
         
         _label4_title = [[UILabel alloc] initWithFrame:CGRectMake(10 + 15, 10, (widthLength - 150) / 2 - 25, 15)];
         _label4_title.text = @"必买清单";
-        _label4_title.font = [UIFont systemFontOfSize:16.0];
+        _label4_title.font = [UIFont systemFontOfSize:14.0];
         _label4_title.textColor = [UIColor colorWithRed:255/255.0 green:86/255.0 blue:123/255.0 alpha:1];
         [_button4 addSubview:_label4_title];               //添加button3的标题
         
         _label4_detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, (widthLength - 150) / 2 - 10, 15)];
-        _label4_detail.font = [UIFont systemFontOfSize:11.0];
+        _label4_detail.font = [UIFont systemFontOfSize:10.0];
         _label4_detail.text = @"都帮您整理好啦";
         [_button4 addSubview:_label4_detail];                 //添加button3的介绍
         
@@ -177,7 +179,9 @@
 
 - (void)fourButtonAction:(UIButton *)sender
 {
-    NSLog(@"不要乱点了，这里的事件还没写");
+    //NSLog(@"不要乱点了，这里的事件还没写");            //利用tag值区别按钮
+    SLBuyViewController *buyViewController = [[SLBuyViewController alloc] init];
+    [self.owner presentViewController:buyViewController animated:YES completion:nil];
 }
 
 - (void)startTimeCounting

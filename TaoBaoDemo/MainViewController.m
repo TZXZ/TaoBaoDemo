@@ -15,6 +15,7 @@
 #define WL self.view.frame.size.width
 #define HL self.view.frame.size.height
 #define NUM 5                                   //滚动广告的图片数量
+#define NUM_LoadImage 32
 
 @interface MainViewController ()
 
@@ -41,6 +42,7 @@
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(9, 30, 40, 20)];
     leftLabel.text = @"扫一扫";
+    leftLabel.textColor = [UIColor whiteColor];
     [leftLabel setTextAlignment:NSTextAlignmentCenter];
     leftLabel.font = [UIFont systemFontOfSize:9.0];
     
@@ -50,6 +52,7 @@
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     UILabel *rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(WL - 48, 30, 40, 20)];
     rightLabel.text = @"消息";
+    rightLabel.textColor = [UIColor whiteColor];
     [rightLabel setTextAlignment:NSTextAlignmentCenter];
     rightLabel.font = [UIFont systemFontOfSize:9.0];
     
@@ -141,13 +144,13 @@
     UIView *graySpace = [[UIView alloc] initWithFrame:CGRectMake(0, WL * 0.3 + 150 + 60, WL, 10)];
     graySpace.backgroundColor = [UIColor colorWithRed:245/255.0 green:246/255.0 blue:247/255.0 alpha:1];
     [self.viewForTableHeadView addSubview:graySpace];              //添加灰色部分，美化
-    SLSectionHeadView *headViewLast = [[SLSectionHeadView alloc] initWithFrame:CGRectMake(0, WL * 0.3 + 150 + 60 + 10, WL, 160)];
+    headViewLast = [[SLSectionHeadView alloc] initWithFrame:CGRectMake(0, WL * 0.3 + 150 + 60 + 10, WL, 160)];
+    headViewLast.owner = self;
     [self.viewForTableHeadView addSubview:headViewLast];            //添加最后部分视图
     
 //开始网络请求图片数据
     [self getImageForButtons];
-    self.mutableArrayForImage = [[NSMutableArray alloc] init];
-    self.couldLoadImage = NO;         //改值判断能否加载图片
+    self.couldLoadImage = NO;         //该值判断能否加载图片
 }
 
 
@@ -171,7 +174,7 @@
 }
 
 
-#pragma mark -- WHScrollViewViewDelegate
+#pragma mark -- WHScrollViewViewDelegate     滚动广告的代理事件，响应点击事件的
 - (void)didClickPage:(WHScrollAndPageView *)view atIndex:(NSInteger)index
 {
     NSLog(@"点击了滚动广告的第%ld页",(long)index);
@@ -282,9 +285,14 @@
         //判断是否有图片数据，有的话就加载，没有就忽略
         if (_couldLoadImage)
         {
-            [cell.button1 setImage:[_mutableArrayForImage objectAtIndex:0] forState:UIControlStateNormal];
-            [cell.button2 setImage:[_mutableArrayForImage objectAtIndex:1] forState:UIControlStateNormal];
-            [cell.button3 setImage:[_mutableArrayForImage objectAtIndex:2] forState:UIControlStateNormal];
+            [cell.button1 setImage:[_dicForImage objectForKey:@"image4.png"] forState:UIControlStateNormal];
+            [cell.button2 setImage:[_dicForImage objectForKey:@"image5.png"] forState:UIControlStateNormal];
+            [cell.button3 setImage:[_dicForImage objectForKey:@"image6.png"] forState:UIControlStateNormal];
+            [cell.button4 setImage:[_dicForImage objectForKey:@"image7.png"] forState:UIControlStateNormal];
+            [cell.button5 setImage:[_dicForImage objectForKey:@"image8.png"] forState:UIControlStateNormal];
+            [cell.button6 setImage:[_dicForImage objectForKey:@"image9.png"] forState:UIControlStateNormal];
+            [cell.button7 setImage:[_dicForImage objectForKey:@"image10.png"] forState:UIControlStateNormal];
+            [cell.button8 setImage:[_dicForImage objectForKey:@"image11.png"] forState:UIControlStateNormal];
         }
         
         return cell;
@@ -299,6 +307,17 @@
             cell = [SLHomeSecondCell alloc];
             cell.widthLength = WL;
             cell = [cell initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        
+        //判断是否有图片，有就加载
+        if (_couldLoadImage)
+        {
+            [cell.button1 setImage:[_dicForImage objectForKey:@"image12.png"] forState:UIControlStateNormal];
+            [cell.button2 setImage:[_dicForImage objectForKey:@"image13.png"] forState:UIControlStateNormal];
+            [cell.button3 setImage:[_dicForImage objectForKey:@"image14.png"] forState:UIControlStateNormal];
+            [cell.button4 setImage:[_dicForImage objectForKey:@"image15.png"] forState:UIControlStateNormal];
+            [cell.button5 setImage:[_dicForImage objectForKey:@"image16.png"] forState:UIControlStateNormal];
+            [cell.button6 setImage:[_dicForImage objectForKey:@"image17.png"] forState:UIControlStateNormal];
         }
         
         return cell;
@@ -323,16 +342,29 @@
         cell.label4_1.text = @"极有家";
         cell.label4_2.text = @"严格选好货";
         cell.label5_1.text = @"拍卖会";
-        cell.label5_2.text = @"特价车返场";
+        cell.label5_2.text = @"千元公务车";
         cell.label6_1.text = @"医药健康";
-        cell.label6_2.text = @"几份兑好礼";
+        cell.label6_2.text = @"1元兑美瞳";
         cell.label7_1.text = @"淘宝众筹";
-        cell.label7_2.text = @"激光扫地机";
+        cell.label7_2.text = @"车载播放器";
         cell.label8_1.text = @"每日新品";
         cell.label8_2.text = @"找新品戳我";
         cell.imageViewHead.image = [UIImage imageNamed:@"good_goods.png"];
         cell.labelHead.text = @"特色好货";
         cell.labelHead.textColor = [UIColor colorWithRed:66/255.0 green:218/255.0 blue:255/255.0 alpha:1];
+        
+        //判断是否有图片数据，有的话就加载，没有就忽略
+        if (_couldLoadImage)
+        {
+            [cell.button1 setImage:[_dicForImage objectForKey:@"image18.png"] forState:UIControlStateNormal];
+            [cell.button2 setImage:[_dicForImage objectForKey:@"image19.png"] forState:UIControlStateNormal];
+            [cell.button3 setImage:[_dicForImage objectForKey:@"image20.png"] forState:UIControlStateNormal];
+            [cell.button4 setImage:[_dicForImage objectForKey:@"image21.png"] forState:UIControlStateNormal];
+            [cell.button5 setImage:[_dicForImage objectForKey:@"image22.png"] forState:UIControlStateNormal];
+            [cell.button6 setImage:[_dicForImage objectForKey:@"image23.png"] forState:UIControlStateNormal];
+            [cell.button7 setImage:[_dicForImage objectForKey:@"image24.png"] forState:UIControlStateNormal];
+            [cell.button8 setImage:[_dicForImage objectForKey:@"image25.png"] forState:UIControlStateNormal];
+        }
         
         return cell;
     }
@@ -352,16 +384,27 @@
         cell.labelHead.textColor = [UIColor greenColor];
         cell.label1_1.text = @"美食";
         cell.label1_2.text = @"春游也要吃";
-        cell.label2_1.text = @"数码";
-        cell.label2_2.text = @"潮流新奇特";
-        cell.label3_1.text = @"汽车";
-        cell.label3_2.text = @"春季包养季";
-        cell.label4_1.text = @"家电";
-        cell.label4_2.text = @"送妈妈实用";
-        cell.label5_1.text = @"内衣";
-        cell.label5_2.text = @"性感装备";
-        cell.label6_1.text = @"女装";
-        cell.label6_2.text = @"女神必备";
+        cell.label2_1.text = @"内衣";
+        cell.label2_2.text = @"性感装备";
+        cell.label3_1.text = @"数码";
+        cell.label3_2.text = @"潮流新奇特";
+        cell.label4_1.text = @"汽车";
+        cell.label4_2.text = @"春季包养季";
+        cell.label5_1.text = @"家电";
+        cell.label5_2.text = @"送妈妈实用";
+        cell.label6_1.text = @"箱包";
+        cell.label6_2.text = @"潮流特卖";
+        
+        //判断是否有图片，有就加载
+        if (_couldLoadImage)
+        {
+            [cell.button1 setImage:[_dicForImage objectForKey:@"image26.png"] forState:UIControlStateNormal];
+            [cell.button2 setImage:[_dicForImage objectForKey:@"image27.png"] forState:UIControlStateNormal];
+            [cell.button3 setImage:[_dicForImage objectForKey:@"image28.png"] forState:UIControlStateNormal];
+            [cell.button4 setImage:[_dicForImage objectForKey:@"image29.png"] forState:UIControlStateNormal];
+            [cell.button5 setImage:[_dicForImage objectForKey:@"image30.png"] forState:UIControlStateNormal];
+            [cell.button6 setImage:[_dicForImage objectForKey:@"image31.png"] forState:UIControlStateNormal];
+        }
         
         return cell;
     }
@@ -396,44 +439,49 @@
 
 
 #pragma mark -- 从服务器获取商品图片 相关方法
-- (void)getImageForButtons
+- (void)getImageForButtons                          //从服务器获取图片
 {
-    
-    //NSOperationQueue *someQueue = [[NSOperationQueue alloc] init];
-        for (int i = 0; i < 3; i ++)
+    self.dicForImage = [[NSMutableDictionary alloc] init];
+    for (int i = 0; i < NUM_LoadImage; i ++)
+    {
+        //1.确定请求路径
+        NSString *strURL = [NSString stringWithFormat:@"http://localhost/buttonpng/image%d.png",i];
+        NSURL *url = [NSURL URLWithString:strURL];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSURLSession *session = [NSURLSession sharedSession];
+        
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
         {
-            //1.确定请求路径
-            NSString *strURL = [NSString stringWithFormat:@"http://localhost/image%d.png",i];
-            NSURL *url = [NSURL URLWithString:strURL];
-            
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            NSURLSession *session = [NSURLSession sharedSession];
-            
-            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-            {
-                NSLog(@"当前线程为 %@",[NSThread currentThread]);
-                UIImage *image = [UIImage imageWithData:data];
-                [self.mutableArrayForImage addObject:image];
-                NSLog(@"我有加载好过吗");
-            }];
-            
-            //5.执行任务
-            [dataTask resume];
-        }
+            //NSLog(@"当前线程为 %@",[NSThread currentThread]);
+            UIImage *image = [UIImage imageWithData:data];
+            [self.dicForImage setObject:image forKey:[NSString stringWithFormat:@"image%d.png",i]];
+        }];
+        
+        //5.执行任务
+        [dataTask resume];
+    }
     
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(watchingForSession:) userInfo:nil repeats:YES];
     
 }
 
-- (void)watchingForSession:(NSTimer *)timer
+- (void)watchingForSession:(NSTimer *)timer         //监测图片数据是否加载完成，如果完成就刷新页面
 {
-    NSLog(@"我到底有出现过吗");
     
-    if (_mutableArrayForImage.count == 3)
+    if ([_dicForImage allKeys].count == NUM_LoadImage)
     {
-        NSLog(@"数据请求完成,我要开始行动");
+        NSLog(@"数据请求完成,我要开始刷新table view");
         [timer invalidate];
         [NSThread sleepForTimeInterval:1];
+        
+        //先加载表头视图里面的图片
+        [headViewLast.button1 setImage:[_dicForImage objectForKey:@"image0.png"] forState:UIControlStateNormal];
+        [headViewLast.button2 setImage:[_dicForImage objectForKey:@"image1.png"] forState:UIControlStateNormal];
+        [headViewLast.button3 setImage:[_dicForImage objectForKey:@"image2.png"] forState:UIControlStateNormal];
+        [headViewLast.button4 setImage:[_dicForImage objectForKey:@"image3.png"] forState:UIControlStateNormal];
+        
+        
         _couldLoadImage = YES;
         [self.tableView reloadData];
     }
@@ -441,54 +489,7 @@
 }
 
 
-//NSURLSessionDelegate
-//1.接收到服务器响应的时候调用该方法
-//- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
-//{
-//    //在该方法中可以得到响应头信息，即response
-//    NSLog(@"didReceiveResponse--%@",[NSThread currentThread]);
-//    self.dataResponse = [[NSMutableData alloc] init];
-//    self.mutableArrayForImage = [[NSMutableArray alloc] init];
-//    
-//    //注意：需要使用completionHandler回调告诉系统应该如何处理服务器返回的数据
-//    //默认是取消的
-//    /*
-//     NSURLSessionResponseCancel = 0,        默认的处理方式，取消
-//     NSURLSessionResponseAllow = 1,         接收服务器返回的数据
-//     NSURLSessionResponseBecomeDownload = 2,变成一个下载请求
-//     NSURLSessionResponseBecomeStream        变成一个流
-//     */
-//    
-//    completionHandler(NSURLSessionResponseAllow);
-//}
-//
-////2.接收到服务器返回数据的时候会调用该方法，如果数据较大那么该方法可能会调用多次
-//- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
-//{
-//    NSLog(@"didReceiveData--%@",[NSThread currentThread]);
-//    
-//    //拼接服务器返回数据
-//    [self.dataResponse appendData:data];
-//}
-//
-////3.当请求完成（成功|失败）的时候会调用该方法，如果请求失败，则有error值
-//- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
-//{
-//    NSLog(@"didCompleteWithError--%@",[NSThread currentThread]);
-//    
-//    if(error == nil)
-//    {
-//        //解析数据,JSON解析请参考http://www.cnblogs.com/wendingding/p/3815303.html
-//        UIImage *image = [UIImage imageWithData:self.dataResponse];
-//        [self.mutableArrayForImage addObject:image];
-//        
-//        NSLog(@"请求成功了");
-//        
-//    }else
-//    {
-//        NSLog(@"好像失败了");
-//    }
-//}
+
 
 
 

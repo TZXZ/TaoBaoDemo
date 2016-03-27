@@ -48,7 +48,7 @@
         _label1_2.font = [UIFont systemFontOfSize:13.0];
         _label1_2.textColor = [UIColor grayColor];
         _label1_1.text = @"非常大牌";
-        _label1_2.text = @"女票会穿搭";
+        _label1_2.text = @"早春新品";
         [_button1 addSubview:_label1_1];
         [_button1 addSubview:_label1_2];
         [_button1 addTarget:self action:@selector(tenButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -90,7 +90,7 @@
         _label4_2.font = [UIFont systemFontOfSize:11.0];
         _label4_2.textColor = [UIColor grayColor];
         _label4_1.text = @"量贩团";
-        _label4_2.text = @"超值屯好货";
+        _label4_2.text = @"价优赠品多";
         [_button4 addSubview:_label4_1];
         [_button4 addSubview:_label4_2];
         [_button4 addTarget:self action:@selector(tenButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -103,7 +103,7 @@
         _label5_2.font = [UIFont systemFontOfSize:11.0];
         _label5_2.textColor = [UIColor grayColor];
         _label5_1.text = @"聚名品";
-        _label5_2.text = @"奢品狂欢";
+        _label5_2.text = @"无奢不欢";
         [_button5 addSubview:_label5_1];
         [_button5 addSubview:_label5_2];
         [_button5 addTarget:self action:@selector(tenButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -117,7 +117,7 @@
         _label6_2.font = [UIFont systemFontOfSize:11.0];
         _label6_2.textColor = [UIColor grayColor];
         _label6_1.text = @"品牌店庆";
-        _label6_2.text = @"低至0.01元";
+        _label6_2.text = @"立减10元";
         [_button6 addSubview:_label6_1];
         [_button6 addSubview:_label6_2];
         [_button6 addTarget:self action:@selector(tenButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -130,7 +130,7 @@
         _label7_2.font = [UIFont systemFontOfSize:11.0];
         _label7_2.textColor = [UIColor grayColor];
         _label7_1.text = @"俪人购";
-        _label7_2.text = @"今天折上折";
+        _label7_2.text = @"满500减100";
         [_button7 addSubview:_label7_1];
         [_button7 addSubview:_label7_2];
         [_button7 addTarget:self action:@selector(tenButtonAction:) forControlEvents:UIControlEventTouchUpInside];

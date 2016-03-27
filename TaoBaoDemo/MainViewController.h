@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "WHScrollAndPageView.h"
+@class SLSectionHeadView;
 
 @interface MainViewController : UIViewController<WHScrollViewViewDelegate,UITableViewDataSource,UITableViewDelegate,NSURLSessionDataDelegate>
+{
+    SLSectionHeadView *headViewLast;
+}
 
 @property (strong, nonatomic) UIView *viewForTableHeadView;
 @property (strong, nonatomic) UIView *viewForRotatingNews;
@@ -21,7 +25,7 @@
 @property (strong, nonatomic) WHScrollAndPageView *whView;
 
 @property (strong, nonatomic) NSMutableData *dataResponse;
-@property (strong, nonatomic) NSMutableArray *mutableArrayForImage;
+@property (strong, nonatomic) NSMutableDictionary *dicForImage;
 @property (assign, nonatomic) BOOL couldLoadImage;
 
 @end

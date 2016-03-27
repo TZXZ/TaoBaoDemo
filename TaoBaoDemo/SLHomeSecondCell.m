@@ -89,7 +89,7 @@
         _label4_2.font = [UIFont systemFontOfSize:11.0];
         _label4_2.textColor = [UIColor grayColor];
         _label4_1.text = @"天天搞机";
-        _label4_2.text = @"360手机f4开抢";
+        _label4_2.text = @"红米今日原价";
         [_button4 addSubview:_label4_1];
         [_button4 addSubview:_label4_2];
         [_button4 addTarget:self action:@selector(eightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
