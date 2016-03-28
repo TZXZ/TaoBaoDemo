@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SLHomeTableViewCellDelegate <NSObject>
+
+- (void)actWhenUserTouchThisCell;
+
+@end
+
+
 @interface SLHomeTableViewCell : UITableViewCell
 
+@property (nonatomic, assign) id<SLHomeTableViewCellDelegate> delegate;
 
 @property (assign, nonatomic) float widthLength;
 @property (strong, nonatomic) UIImageView *imageViewHead;

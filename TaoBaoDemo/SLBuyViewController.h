@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class SLBuyCustomHeadView;
+
 @interface SLBuyViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+{
+    SLBuyCustomHeadView *viewForTableHead;
+}
 
 
-@property (nonatomic, strong) UITableView *tableView;            //页面基础控件
+@property (nonatomic, strong) UITableView *tableView;            //最基础页面
+@property (nonatomic, strong) UIView *viewForTableHeadView;
 
 
 @end

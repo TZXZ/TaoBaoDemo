@@ -250,6 +250,11 @@
             NSLog(@"这个是nutton8");
         }
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(actWhenUserTouchThisCell)])
+    {
+        [self.delegate actWhenUserTouchThisCell];
+    }
 }
 
 

@@ -51,6 +51,12 @@
 		8459460A1CA524D600C203E3 /* big_finger.png in Resources */ = {isa = PBXBuildFile; fileRef = 845946091CA524D600C203E3 /* big_finger.png */; };
 		8459460E1CA5536C00C203E3 /* love_shop.png in Resources */ = {isa = PBXBuildFile; fileRef = 8459460D1CA5536C00C203E3 /* love_shop.png */; };
 		845946101CA55BF700C203E3 /* shop_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 8459460F1CA55BF700C203E3 /* shop_list.png */; };
+		847A358F1CA8C4C50052908A /* SLGoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 847A358E1CA8C4C50052908A /* SLGoodsDetail.m */; };
+		847A35921CA8CE380052908A /* SLBuyCustomHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 847A35911CA8CE380052908A /* SLBuyCustomHeadView.m */; };
+		847A35941CA9083C0052908A /* buy_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 847A35931CA9083C0052908A /* buy_share.png */; };
+		847A35961CA920D40052908A /* customer_service.png in Resources */ = {isa = PBXBuildFile; fileRef = 847A35951CA920D40052908A /* customer_service.png */; };
+		847A359A1CA9239B0052908A /* store_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 847A35991CA9239B0052908A /* store_image.png */; };
+		847A359C1CA925310052908A /* collect_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 847A359B1CA925310052908A /* collect_image.png */; };
 		849BE0791C7550E400D8C078 /* WHScrollAndPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849BE0781C7550E400D8C078 /* WHScrollAndPageView.m */; };
 		849BE07B1C75557F00D8C078 /* RollImage_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 849BE07A1C75557F00D8C078 /* RollImage_0.jpg */; };
 		849BE07E1C75561200D8C078 /* RollImage_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 849BE07C1C75561200D8C078 /* RollImage_3.jpg */; };
@@ -173,6 +179,14 @@
 		845946091CA524D600C203E3 /* big_finger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = big_finger.png; sourceTree = "<group>"; };
 		8459460D1CA5536C00C203E3 /* love_shop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = love_shop.png; sourceTree = "<group>"; };
 		8459460F1CA55BF700C203E3 /* shop_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_list.png; sourceTree = "<group>"; };
+		847A358D1CA8C4C50052908A /* SLGoodsDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLGoodsDetail.h; sourceTree = "<group>"; };
+		847A358E1CA8C4C50052908A /* SLGoodsDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLGoodsDetail.m; sourceTree = "<group>"; };
+		847A35901CA8CE380052908A /* SLBuyCustomHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLBuyCustomHeadView.h; sourceTree = "<group>"; };
+		847A35911CA8CE380052908A /* SLBuyCustomHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLBuyCustomHeadView.m; sourceTree = "<group>"; };
+		847A35931CA9083C0052908A /* buy_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buy_share.png; sourceTree = "<group>"; };
+		847A35951CA920D40052908A /* customer_service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = customer_service.png; sourceTree = "<group>"; };
+		847A35991CA9239B0052908A /* store_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = store_image.png; sourceTree = "<group>"; };
+		847A359B1CA925310052908A /* collect_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collect_image.png; sourceTree = "<group>"; };
 		849BE0771C7550E400D8C078 /* WHScrollAndPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHScrollAndPageView.h; sourceTree = "<group>"; };
 		849BE0781C7550E400D8C078 /* WHScrollAndPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHScrollAndPageView.m; sourceTree = "<group>"; };
 		849BE07A1C75557F00D8C078 /* RollImage_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RollImage_0.jpg; sourceTree = "<group>"; };
@@ -349,6 +363,10 @@
 			children = (
 				84A1BFCA1CA7EE0600FCBB1A /* SLBuyViewController.h */,
 				84A1BFCB1CA7EE0600FCBB1A /* SLBuyViewController.m */,
+				847A358D1CA8C4C50052908A /* SLGoodsDetail.h */,
+				847A358E1CA8C4C50052908A /* SLGoodsDetail.m */,
+				847A35901CA8CE380052908A /* SLBuyCustomHeadView.h */,
+				847A35911CA8CE380052908A /* SLBuyCustomHeadView.m */,
 				84A1BFCD1CA7FCB900FCBB1A /* BuyViewResources */,
 			);
 			name = BuyView;
@@ -357,6 +375,10 @@
 		84A1BFCD1CA7FCB900FCBB1A /* BuyViewResources */ = {
 			isa = PBXGroup;
 			children = (
+				847A359B1CA925310052908A /* collect_image.png */,
+				847A35991CA9239B0052908A /* store_image.png */,
+				847A35951CA920D40052908A /* customer_service.png */,
+				847A35931CA9083C0052908A /* buy_share.png */,
 				84A1BFCE1CA7FCD100FCBB1A /* buy_view_back.png */,
 			);
 			name = BuyViewResources;
@@ -715,6 +737,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84D71B9A1C59FF0900097A55 /* weitao1.png in Resources */,
+				847A359C1CA925310052908A /* collect_image.png in Resources */,
 				845945FE1CA4D4A400C203E3 /* tianmao_special.png in Resources */,
 				84FC59B61C51D5A400E6512B /* UserViewController.xib in Resources */,
 				841B075B1CA6560F00FC858F /* button34_image.png in Resources */,
@@ -723,6 +746,7 @@
 				84FC59AA1C51D52300E6512B /* CommunityViewController.xib in Resources */,
 				84A1BFC81CA7C38000FCBB1A /* xiaoxi.png in Resources */,
 				8402D10D1C9989FE008A940A /* my_secretary.png in Resources */,
+				847A35961CA920D40052908A /* customer_service.png in Resources */,
 				849BE0851C75561E00D8C078 /* RollImage_5.jpg in Resources */,
 				8402D0F51C9977D7008A940A /* after_services.png in Resources */,
 				84DA1DB81C9BDD2000F6FC99 /* hand.png in Resources */,
@@ -766,7 +790,9 @@
 				8402D0FD1C9984B4008A940A /* shop_collect.png in Resources */,
 				849BE07B1C75557F00D8C078 /* RollImage_0.jpg in Resources */,
 				8402D0EB1C99740F008A940A /* wait_pay.png in Resources */,
+				847A359A1CA9239B0052908A /* store_image.png in Resources */,
 				8459460A1CA524D600C203E3 /* big_finger.png in Resources */,
+				847A35941CA9083C0052908A /* buy_share.png in Resources */,
 				849BE07F1C75561200D8C078 /* RollImage_4.jpg in Resources */,
 				841B07591CA6560F00FC858F /* button40_image.png in Resources */,
 				84F74C381CA37150004FECCB /* good_goods.png in Resources */,
@@ -807,10 +833,12 @@
 				84FC59B51C51D5A400E6512B /* UserViewController.m in Sources */,
 				84DA9B931C9ED2C8003073B9 /* ASIDataCompressor.m in Sources */,
 				84DA9B751C9ECA21003073B9 /* UserInfomation.m in Sources */,
+				847A358F1CA8C4C50052908A /* SLGoodsDetail.m in Sources */,
 				84DA9B991C9ED2C8003073B9 /* ASINetworkQueue.m in Sources */,
 				849BE0791C7550E400D8C078 /* WHScrollAndPageView.m in Sources */,
 				84FC598E1C51CF5400E6512B /* AppDelegate.m in Sources */,
 				84A1BFCC1CA7EE0600FCBB1A /* SLBuyViewController.m in Sources */,
+				847A35921CA8CE380052908A /* SLBuyCustomHeadView.m in Sources */,
 				84DA9B951C9ED2C8003073B9 /* ASIDownloadCache.m in Sources */,
 				841D74631CA1290800C12B13 /* SLHomeTableViewCell.m in Sources */,
 				84DA9B9B1C9ED2C8003073B9 /* ASINetWorkQueue_imageDataDownLoadDemoViewController.m in Sources */,

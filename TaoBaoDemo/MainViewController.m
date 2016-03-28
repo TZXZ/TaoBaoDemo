@@ -7,10 +7,11 @@
 //
 
 #import "MainViewController.h"
-#import "SLHomeTableViewCell.h"
+//#import "SLHomeTableViewCell.h"
 #import "SLHomeSecondCell.h"
 #import "SLSectionHeadView.h"
 #import "SLHomeSearchButtonView.h"
+#import "SLBuyViewController.h"
 
 #define WL self.view.frame.size.width
 #define HL self.view.frame.size.height
@@ -267,6 +268,7 @@
     {
         static NSString *cellID = @"SectionZero";
         SLHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        cell.delegate = self;
         if (cell == nil)
         {
             cell = [SLHomeTableViewCell alloc];
@@ -486,6 +488,14 @@
         [self.tableView reloadData];
     }
     
+}
+
+
+#pragma mark -- SLHomeTableViewCellDelegate   点击Section0 和Section2 时响应用户的代理事件
+- (void)actWhenUserTouchThisCell
+{
+    SLBuyViewController *buyViewController = [[SLBuyViewController alloc] init];
+    [self presentViewController:buyViewController animated:YES completion:nil];
 }
 
 
