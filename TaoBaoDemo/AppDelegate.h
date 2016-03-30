@@ -19,6 +19,7 @@
 @property (assign, nonatomic) BOOL userHasLogin;
 
 @property (assign, nonatomic) int numberOfGoods;
+@property (strong, nonatomic) NSMutableArray *arrayForCart;
 
 
 

@@ -108,7 +108,7 @@
         _labelMoneyHigh.textColor = [UIColor colorWithRed:255/255.0 green:74/255.0 blue:26/255.0 alpha:1];
         [self addSubview:_labelMoneyHigh];                  //添加最高价格
         
-        _labelTest1 = [[UILabel alloc] initWithFrame:CGRectMake(0 + 10, widthZ * 0.8 + 40 + 10 + 10 + 20 + 10, 80, 20)];
+        _labelTest1 = [[UILabel alloc] initWithFrame:CGRectMake(0 + 10, widthZ * 0.8 + 40 + 10 + 10 + 20 + 10, 80 + 20, 20)];
         _labelTest1.font = [UIFont systemFontOfSize:12.0];
         _labelTest1.text = @"快递：免运费";
         _labelTest1.textColor = [UIColor grayColor];

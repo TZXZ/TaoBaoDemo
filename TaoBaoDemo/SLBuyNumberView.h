@@ -13,6 +13,6 @@
 
 @property (nonatomic, strong) UILabel *labelCount;
 
-@property (nonatomic, copy) void(^buyBlockTest)();
+@property (nonatomic, copy) void(^buyBlockTest)(NSString *strNum);
 
 @end

@@ -155,6 +155,8 @@
                   goodsYouSeeNow.saleState = [dic objectForKey:@"salestat"];
                   goodsYouSeeNow.addressState = [dic objectForKey:@"addressstat"];
                   
+                  NSLog(@"goodsYouSeeNow.name = %@",goodsYouSeeNow.name);
+                  
                   viewForTableHead.labelDetail.text = goodsYouSeeNow.describe;
                   viewForTableHead.labelMoneyLow.text = goodsYouSeeNow.price;
                   viewForTableHead.labelTest1.text = goodsYouSeeNow.postState;
@@ -209,6 +211,14 @@
 }
 
 
+#pragma mark -- 测试一些方法用
+- (void)soSlowToLoadMessage:(NSDictionary *)dic
+{
+    //NSLog(@"dic price = %@",[dic objectForKey:@"price"]);
+    //viewForTableHead.labelMoneyLow.text = [dic objectForKey:@"price"];
+}
+
+
 
 #pragma mark -- TableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -250,33 +260,51 @@
 
 
 #pragma mark -- 添加到购物车以及立即购买 相应事件
-- (void)buttonAddCart:(UIButton *)sender
+- (void)buttonAddCart:(UIButton *)sender                //购物车按钮事件
 {
-    //NSLog(@"加入购物车！");
+    
     [UIView animateWithDuration:1 animations:^
     {
         viewForNumber.frame = CGRectMake(0, HL - 150, WL, 150);
     } completion:^(BOOL finished)
+    {}];
+    
+    __block SLBuyViewController *blockSelf = self;            //防止循环引用
+    viewForNumber.buyBlockTest = ^(NSString *strNum)
     {
-        NSLog(@"动画完成！");
+        [blockSelf getNumberViewDown];
+        [blockSelf addGoodsToCart:strNum];
+    };
+}
+
+- (void)buttonBuyNow:(UIButton *)sender                 //立即购买按钮事件
+{
+    
+}
+
+- (void)getNumberViewDown                   //将选择数量视图降下去
+{
+    [UIView animateWithDuration:1 animations:^
+    {
+        viewForNumber.frame = CGRectMake(0, HL, WL, 150);
     }];
     
-    viewForNumber.buyBlockTest = ^()
-    {
-        
-    };
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"成功添加至购物车" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)buttonBuyNow:(UIButton *)sender
+- (void)addGoodsToCart:(NSString *)str                  //添加到购物车要显示的数组中去
 {
-    NSLog(@"立即购买！");
+    NSLog(@"当前购买的商品数量是 %@",str);
     
-    viewForNumber.buyBlockTest = ^()
-    {
-        NSLog(@"这么用的？ zzzzzzz");
-    };
-}
+    //NSDate *date = [NSDate date];
 
+    goodsYouSeeNow.dateStr = @"2016.3.30";
+    goodsYouSeeNow.countOfNeed = str.intValue;
+    [delegate.arrayForCart addObject:goodsYouSeeNow];
+}
 
 
 @end

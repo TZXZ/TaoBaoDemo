@@ -7,6 +7,7 @@
 //
 
 #import "SLHomeTableViewCell.h"
+#import "AppDelegate.h"
 
 #define WL self.frame.size.width
 
@@ -177,77 +178,95 @@
 
 - (void)tenButtonAction:(UIButton *)sender
 {
+    appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
     if ([self.reuseIdentifier isEqualToString:@"SectionZero"])
     {
-        NSLog(@"这个是Section0的button");
+        //NSLog(@"这个是Section0的button");
         if (sender == _button1)
         {
-            NSLog(@"这个是button1");
+            //NSLog(@"这个是button1");
+            appDelegate.numberOfGoods = 10005;
         }
         else if (sender == _button2)
         {
-            NSLog(@"这个是button2");
+            //NSLog(@"这个是button2");
+            appDelegate.numberOfGoods = 10006;
         }
         else if (sender == _button3)
         {
-            NSLog(@"这个是nutton3");
+            //NSLog(@"这个是nutton3");
+            appDelegate.numberOfGoods = 10007;
         }
         else if (sender == _button4)
         {
-            NSLog(@"这个是nutton4");
+            //NSLog(@"这个是nutton4");
+            appDelegate.numberOfGoods = 10008;
         }
         else if (sender == _button5)
         {
-            NSLog(@"这个是nutton5");
+            //NSLog(@"这个是nutton5");
+            appDelegate.numberOfGoods = 10009;
         }
         else if (sender == _button6)
         {
-            NSLog(@"这个是nutton6");
+            //NSLog(@"这个是nutton6");
+            appDelegate.numberOfGoods = 10010;
         }
         else if (sender == _button7)
         {
-            NSLog(@"这个是nutton7");
+            //NSLog(@"这个是nutton7");
+            appDelegate.numberOfGoods = 10011;
         }
         else if (sender == _button8)
         {
-            NSLog(@"这个是nutton8");
+            //NSLog(@"这个是nutton8");
+            appDelegate.numberOfGoods = 10012;
         }
         
     }
     else if ([self.reuseIdentifier isEqualToString:@"SectionTwo"])
     {
-        NSLog(@"这个是Section2的button");
+        //NSLog(@"这个是Section2的button");
         if (sender == _button1)
         {
-            NSLog(@"这个是button1");
+            //NSLog(@"这个是button1");
+            appDelegate.numberOfGoods = 10013;
         }
         else if (sender == _button2)
         {
-            NSLog(@"这个是button2");
+            //NSLog(@"这个是button2");
+            appDelegate.numberOfGoods = 10014;
         }
         else if (sender == _button3)
         {
-            NSLog(@"这个是nutton3");
+            //NSLog(@"这个是nutton3");
+            appDelegate.numberOfGoods = 10015;
         }
         else if (sender == _button4)
         {
-            NSLog(@"这个是nutton4");
+            //NSLog(@"这个是nutton4");
+            appDelegate.numberOfGoods = 10016;
         }
         else if (sender == _button5)
         {
-            NSLog(@"这个是nutton5");
+            //NSLog(@"这个是nutton5");
+            appDelegate.numberOfGoods = 10017;
         }
         else if (sender == _button6)
         {
-            NSLog(@"这个是nutton6");
+            //NSLog(@"这个是nutton6");
+            appDelegate.numberOfGoods = 10018;
         }
         else if (sender == _button7)
         {
-            NSLog(@"这个是nutton7");
+            //NSLog(@"这个是nutton7");
+            appDelegate.numberOfGoods = 10019;
         }
         else if (sender == _button8)
         {
-            NSLog(@"这个是nutton8");
+            //NSLog(@"这个是nutton8");
+            appDelegate.numberOfGoods = 10020;
         }
     }
     

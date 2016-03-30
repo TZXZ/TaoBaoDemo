@@ -106,7 +106,7 @@
 {
     if (self.buyBlockTest)
     {
-        self.buyBlockTest();
+        self.buyBlockTest(self.labelCount.text);
     }
 }
 

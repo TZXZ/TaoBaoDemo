@@ -37,6 +37,7 @@
     self.userHasLogin = NO;
     self.userInfomation = [[UserInfomation alloc] init];
     _numberOfGoods = 10001;
+    _arrayForCart = [[NSMutableArray alloc] init];
     
     //初始化短信验证码
     [SMSSDK registerApp:appkey withSecret:app_secrect];

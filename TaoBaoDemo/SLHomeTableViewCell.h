@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class AppDelegate;
+
+
 @protocol SLHomeTableViewCellDelegate <NSObject>
 
 - (void)actWhenUserTouchThisCell;
@@ -16,6 +19,10 @@
 
 
 @interface SLHomeTableViewCell : UITableViewCell
+{
+    AppDelegate *appDelegate;
+}
+
 
 @property (nonatomic, assign) id<SLHomeTableViewCellDelegate> delegate;
 

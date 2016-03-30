@@ -190,6 +190,14 @@
     {
         delegate.numberOfGoods = 10002;
     }
+    else if (sender.tag == 177)
+    {
+        delegate.numberOfGoods = 10003;
+    }
+    else if (sender.tag == 178)
+    {
+        delegate.numberOfGoods = 10004;
+    }
     
     SLBuyViewController *buyViewController = [[SLBuyViewController alloc] init];
     [self.owner presentViewController:buyViewController animated:YES completion:nil];

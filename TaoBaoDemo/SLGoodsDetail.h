@@ -27,5 +27,6 @@
 @property (nonatomic, copy) NSString *addressState;
 
 @property (nonatomic, assign) int countOfNeed;
+@property (nonatomic, copy) NSString *dateStr;
 
 @end
