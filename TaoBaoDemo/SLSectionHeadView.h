@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 @class MainViewController;
+@class AppDelegate;
 
 @interface SLSectionHeadView : UIView
+{
+    AppDelegate *delegate;
+}
+
 
 @property (nonatomic, strong) MainViewController *owner;
 

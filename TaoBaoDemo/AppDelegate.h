@@ -18,6 +18,8 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (assign, nonatomic) BOOL userHasLogin;
 
+@property (assign, nonatomic) int numberOfGoods;
+
 
 
 @end

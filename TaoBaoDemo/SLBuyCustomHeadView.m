@@ -60,11 +60,11 @@
         _imageView1.image = [UIImage imageNamed:@""];
         [_scrollView addSubview:_imageView1];
         
-        _imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, widthZ, widthZ, widthZ * 0.8)];
+        _imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(widthZ, 0, widthZ, widthZ * 0.8)];
         _imageView2.image = [UIImage imageNamed:@""];
         [_scrollView addSubview:_imageView2];
         
-        _imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(0, widthZ * 2, widthZ, widthZ * 0.8)];
+        _imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(widthZ * 2, 0, widthZ, widthZ * 0.8)];
         _imageView3.image = [UIImage imageNamed:@""];
         [_scrollView addSubview:_imageView3];
         
@@ -100,11 +100,11 @@
         [self addSubview:_labelMoneyLow];
         
         _labelMoneyline= [[UILabel alloc] initWithFrame:CGRectMake(0 + 10 + 20 + 5 + 60, widthZ * 0.8 + 40 + 10 + 10, 20, 20)];
-        _labelMoneyline.text = @"--";
+        //_labelMoneyline.text = @"--";
         [self addSubview:_labelMoneyline];                  //添加价格中间线条
         
         _labelMoneyHigh = [[UILabel alloc] initWithFrame:CGRectMake(0 + 10 + 20 + 5 + 60 + 20, widthZ * 0.8 + 40 + 10 + 10, 60, 20)];
-        _labelMoneyHigh.text = @"18825";
+        //_labelMoneyHigh.text = @"18825";
         _labelMoneyHigh.textColor = [UIColor colorWithRed:255/255.0 green:74/255.0 blue:26/255.0 alpha:1];
         [self addSubview:_labelMoneyHigh];                  //添加最高价格
         

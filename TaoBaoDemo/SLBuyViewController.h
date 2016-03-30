@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @class SLBuyCustomHeadView;
+@class SLBuyNumberView;
+@class AppDelegate;
+@class SLGoodsDetail;
+
 
 @interface SLBuyViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 {
     SLBuyCustomHeadView *viewForTableHead;
+    SLBuyNumberView *viewForNumber;
+    AppDelegate *delegate;
+    SLGoodsDetail *goodsYouSeeNow;
 }
 
 

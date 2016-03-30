@@ -447,7 +447,7 @@
     for (int i = 0; i < NUM_LoadImage; i ++)
     {
         //1.确定请求路径
-        NSString *strURL = [NSString stringWithFormat:@"http://localhost/buttonpng/image%d.png",i];
+        NSString *strURL = [NSString stringWithFormat:@"http://42.96.178.214/img/image%d.png",i];
         NSURL *url = [NSURL URLWithString:strURL];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];

@@ -11,13 +11,21 @@
 @interface SLGoodsDetail : NSObject
 
 
-@property (nonatomic, copy) NSString *Name;
-@property (nonatomic, copy) NSString *PriceLow;
-@property (nonatomic, copy) NSString *PriceHigh;
-@property (nonatomic, copy) NSString *Describe;
+@property (nonatomic, copy) NSString *number;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *price;
+@property (nonatomic, copy) NSString *priceLow;
+@property (nonatomic, copy) NSString *priceHigh;
+@property (nonatomic, copy) NSString *describe;
 
-@property (nonatomic, copy) NSString *img1;
-@property (nonatomic, copy) NSString *img2;
-@property (nonatomic, copy) NSString *img3;
+@property (nonatomic, copy) NSString *imgAddress1;
+@property (nonatomic, copy) NSString *imgAddress2;
+@property (nonatomic, copy) NSString *imgAddress3;
+
+@property (nonatomic, copy) NSString *postState;
+@property (nonatomic, copy) NSString *saleState;
+@property (nonatomic, copy) NSString *addressState;
+
+@property (nonatomic, assign) int countOfNeed;
 
 @end

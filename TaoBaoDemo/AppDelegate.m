@@ -36,6 +36,7 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     self.userHasLogin = NO;
     self.userInfomation = [[UserInfomation alloc] init];
+    _numberOfGoods = 10001;
     
     //初始化短信验证码
     [SMSSDK registerApp:appkey withSecret:app_secrect];

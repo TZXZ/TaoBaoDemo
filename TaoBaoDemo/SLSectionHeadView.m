@@ -9,6 +9,7 @@
 #import "SLSectionHeadView.h"
 #import "SLBuyViewController.h"
 #import "MainViewController.h"
+#import "AppDelegate.h"
 
 @implementation SLSectionHeadView
 
@@ -179,7 +180,17 @@
 
 - (void)fourButtonAction:(UIButton *)sender
 {
-    //NSLog(@"不要乱点了，这里的事件还没写");            //利用tag值区别按钮
+    delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    if (sender.tag == 175)
+    {
+        delegate.numberOfGoods = 10001;
+    }
+    else if (sender.tag == 176)
+    {
+        delegate.numberOfGoods = 10002;
+    }
+    
     SLBuyViewController *buyViewController = [[SLBuyViewController alloc] init];
     [self.owner presentViewController:buyViewController animated:YES completion:nil];
 }
