@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class AppDelegate;
+
+
 @interface SLHomeSecondCell : UITableViewCell
+{
+    AppDelegate *delegate;
+}
 
 
 @property (assign, nonatomic) float widthLength;
@@ -38,6 +44,8 @@
 @property (strong, nonatomic) UIButton *button6;
 @property (strong, nonatomic) UILabel *label6_1;
 @property (strong, nonatomic) UILabel *label6_2;
+
+@property (copy, nonatomic) void (^SecondCellBlock)();
 
 
 @end

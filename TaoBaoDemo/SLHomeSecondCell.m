@@ -7,6 +7,8 @@
 //
 
 #import "SLHomeSecondCell.h"
+#import "AppDelegate.h"
+
 
 @implementation SLHomeSecondCell
 
@@ -151,7 +153,69 @@
 
 - (void)eightButtonAction:(UIButton *)sender
 {
-    NSLog(@"这个是Section1 和Section3 的Button事件");
+    delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    //NSLog(@"这个是Section1 和Section3 的Button事件");
+    if ([self.reuseIdentifier isEqualToString:@"SectionOne"])
+    {
+        if (sender == _button1)
+        {
+            delegate.numberOfGoods = 10013;
+        }
+        else if (sender == _button2)
+        {
+            delegate.numberOfGoods = 10014;
+        }
+        else if (sender == _button3)
+        {
+            delegate.numberOfGoods = 10015;
+        }
+        else if (sender == _button4)
+        {
+            delegate.numberOfGoods = 10016;
+        }
+        else if (sender == _button5)
+        {
+            delegate.numberOfGoods = 10017;
+        }
+        else if (sender == _button6)
+        {
+            delegate.numberOfGoods = 10018;
+        }
+    }
+    else if ([self.reuseIdentifier isEqualToString:@"SectionThree"])
+    {
+        if (sender == _button1)
+        {
+            delegate.numberOfGoods = 10027;
+        }
+        else if (sender == _button2)
+        {
+            delegate.numberOfGoods = 10028;
+        }
+        else if (sender == _button3)
+        {
+            delegate.numberOfGoods = 10029;
+        }
+        else if (sender == _button4)
+        {
+            delegate.numberOfGoods = 10030;
+        }
+        else if (sender == _button5)
+        {
+            delegate.numberOfGoods = 10031;
+        }
+        else if (sender == _button6)
+        {
+            delegate.numberOfGoods = 10032;
+        }
+    }
+    
+    
+    if (self.SecondCellBlock)
+    {
+        self.SecondCellBlock();
+    }
 }
 
 

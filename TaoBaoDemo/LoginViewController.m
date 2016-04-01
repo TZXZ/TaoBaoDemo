@@ -123,7 +123,7 @@
 #pragma mark -- 登录、找回密码、注册、第三方登录按钮事件集合
 - (void)buttonLoginAction:(UIButton *)sender      //登录按钮
 {
-    //NSLog(@"用户点击了登录 !");
+    NSLog(@"用户点击了登录 !");
     NSString *strURL = [NSString stringWithFormat:@"http://www.austrator.com/xbwu/queryX.php?phone=%@",loginView.userNameTextField.text];
     NSURL *url = [NSURL URLWithString:strURL];
     ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:url];
@@ -144,6 +144,7 @@
     [self.navigationController pushViewController:reViewController animated:YES];
 }
 
+//第三方登录
 - (void)buttonForTencent
 {
     NSLog(@"用户点击了腾讯登录");

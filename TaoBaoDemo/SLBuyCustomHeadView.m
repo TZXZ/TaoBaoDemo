@@ -53,7 +53,7 @@
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, widthZ, widthZ * 0.8)];
         _scrollView.contentSize = CGSizeMake(widthZ * 3, 0);
         _scrollView.pagingEnabled = YES;
-        _scrollView.backgroundColor = [UIColor greenColor];
+        _scrollView.backgroundColor = [UIColor colorWithRed:228/255.0 green:228/255.0 blue:230/255.0 alpha:1];
         [self addSubview:_scrollView];
         
         _imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, widthZ, widthZ * 0.8)];

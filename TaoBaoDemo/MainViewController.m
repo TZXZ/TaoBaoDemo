@@ -252,9 +252,9 @@
 
 
 #pragma mark -- TableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView           //暂时只做4个section 最后一个collection view 有时间再做
 {
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -268,7 +268,7 @@
     {
         static NSString *cellID = @"SectionZero";
         SLHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        cell.delegate = self;
+        cell.delegate = self;      //签协议
         if (cell == nil)
         {
             cell = [SLHomeTableViewCell alloc];
@@ -321,6 +321,12 @@
             [cell.button5 setImage:[_dicForImage objectForKey:@"image16.png"] forState:UIControlStateNormal];
             [cell.button6 setImage:[_dicForImage objectForKey:@"image17.png"] forState:UIControlStateNormal];
         }
+        __block MainViewController *blockSelf = self;
+        cell.SecondCellBlock = ^()
+        {
+            SLBuyViewController *buyViewController = [[SLBuyViewController alloc] init];
+            [blockSelf presentViewController:buyViewController animated:YES completion:nil];
+        };
         
         return cell;
     }
@@ -329,6 +335,8 @@
     {
         static NSString *cellID = @"SectionTwo";
         SLHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        cell.delegate = self;         //签协议
+        
         if (cell == nil)
         {
             cell = [SLHomeTableViewCell alloc];
@@ -368,12 +376,13 @@
             [cell.button8 setImage:[_dicForImage objectForKey:@"image25.png"] forState:UIControlStateNormal];
         }
         
+        
         return cell;
     }
     
     else if (indexPath.section == 3)           //第四个Section 中的cell初始化及加入队列
     {
-        static NSString *cellID = @"SectionFour";
+        static NSString *cellID = @"SectionThree";
         SLHomeSecondCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
         if (cell == nil)
         {
@@ -407,6 +416,13 @@
             [cell.button5 setImage:[_dicForImage objectForKey:@"image30.png"] forState:UIControlStateNormal];
             [cell.button6 setImage:[_dicForImage objectForKey:@"image31.png"] forState:UIControlStateNormal];
         }
+        
+        __block MainViewController *blockSelf = self;
+        cell.SecondCellBlock = ^()                //选中的回调
+        {
+            SLBuyViewController *buyViewController = [[SLBuyViewController alloc] init];
+            [blockSelf presentViewController:buyViewController animated:YES completion:nil];
+        };
         
         return cell;
     }

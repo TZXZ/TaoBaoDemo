@@ -227,46 +227,46 @@
     }
     else if ([self.reuseIdentifier isEqualToString:@"SectionTwo"])
     {
-        //NSLog(@"这个是Section2的button");
+        NSLog(@"这个是Section2的button");
         if (sender == _button1)
         {
             //NSLog(@"这个是button1");
-            appDelegate.numberOfGoods = 10013;
+            appDelegate.numberOfGoods = 10019;
         }
         else if (sender == _button2)
         {
             //NSLog(@"这个是button2");
-            appDelegate.numberOfGoods = 10014;
+            appDelegate.numberOfGoods = 10020;
         }
         else if (sender == _button3)
         {
             //NSLog(@"这个是nutton3");
-            appDelegate.numberOfGoods = 10015;
+            appDelegate.numberOfGoods = 10021;
         }
         else if (sender == _button4)
         {
             //NSLog(@"这个是nutton4");
-            appDelegate.numberOfGoods = 10016;
+            appDelegate.numberOfGoods = 10022;
         }
         else if (sender == _button5)
         {
             //NSLog(@"这个是nutton5");
-            appDelegate.numberOfGoods = 10017;
+            appDelegate.numberOfGoods = 10023;
         }
         else if (sender == _button6)
         {
             //NSLog(@"这个是nutton6");
-            appDelegate.numberOfGoods = 10018;
+            appDelegate.numberOfGoods = 10024;
         }
         else if (sender == _button7)
         {
             //NSLog(@"这个是nutton7");
-            appDelegate.numberOfGoods = 10019;
+            appDelegate.numberOfGoods = 10025;
         }
         else if (sender == _button8)
         {
             //NSLog(@"这个是nutton8");
-            appDelegate.numberOfGoods = 10020;
+            appDelegate.numberOfGoods = 10026;
         }
     }
     

@@ -11,6 +11,8 @@
 #import "SLBuyNumberView.h"
 #import "AppDelegate.h"
 #import "SLGoodsDetail.h"
+#import "LoginViewController.h"
+#import "SLPayViewController.h"
 
 #define WL self.view.frame.size.width
 #define HL self.view.frame.size.height
@@ -91,8 +93,16 @@
     [self.view addSubview:line0];                     //添加线条划清界限
     
     UIButton *buttonService = [[UIButton alloc] initWithFrame:CGRectMake(0, HL - 49, 49, 49)];
-    //[buttonService setImage:[UIImage imageNamed:@"customer_service.png"] forState:UIControlStateNormal];
     [self.view addSubview:buttonService];            //添加客服按钮
+    
+    UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(12, 5, 20, 20)];
+    imageView1.image = [UIImage imageNamed:@"ali_server.png"];
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(12, 5 + 20, 20, 20)];
+    label1.font = [UIFont systemFontOfSize:9.0];
+    label1.text = @"客服";
+    [buttonService addSubview:imageView1];
+    [buttonService addSubview:label1];
+    
     UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(49 - 0.5, HL - 49, 0.5, 49)];
     line1.backgroundColor = [UIColor colorWithRed:228/255.0 green:228/255.0 blue:230/255.0 alpha:1];
     [self.view addSubview:line1];                  //添加右边线条
@@ -100,6 +110,15 @@
     UIButton *buttonStore = [[UIButton alloc] initWithFrame:CGRectMake(49, HL - 49, 49, 49)];
     //[buttonStore setImage:[UIImage imageNamed:@"store_image.png"] forState:UIControlStateNormal];
     [self.view addSubview:buttonStore];            //添加店铺按钮
+    
+    UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(12, 5, 20, 20)];
+    imageView2.image = [UIImage imageNamed:@"ali_store.png"];
+    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(12, 5 + 20, 20, 20)];
+    label2.font = [UIFont systemFontOfSize:9.0];
+    label2.text = @"店铺";
+    [buttonStore addSubview:imageView2];
+    [buttonStore addSubview:label2];
+    
     UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(49 + 49 - 0.5, HL - 49, 0.5, 49)];
     line2.backgroundColor = [UIColor colorWithRed:228/255.0 green:228/255.0 blue:230/255.0 alpha:1];
     [self.view addSubview:line2];                 //添加右边线条
@@ -107,6 +126,15 @@
     UIButton *buttonCollect = [[UIButton alloc] initWithFrame:CGRectMake(49 + 49, HL - 49, 49, 49)];
     //[buttonCollect setImage:[UIImage imageNamed:@"collect_image.png"] forState:UIControlStateNormal];
     [self.view addSubview:buttonCollect];            //添加收藏按钮
+    
+    UIImageView *imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(12, 5, 20, 20)];
+    imageView3.image = [UIImage imageNamed:@"ali_collect.png"];
+    UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(12, 5 + 20, 20, 20)];
+    label3.font = [UIFont systemFontOfSize:9.0];
+    label3.text = @"收藏";
+    [buttonCollect addSubview:imageView3];
+    [buttonCollect addSubview:label3];
+    
     UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(49 + 49 + 49 - 0.5, HL - 49, 0.5, 49)];
     line3.backgroundColor = [UIColor colorWithRed:228/255.0 green:228/255.0 blue:230/255.0 alpha:1];
     [self.view addSubview:line3];                 //添加右边线条
@@ -262,24 +290,64 @@
 #pragma mark -- 添加到购物车以及立即购买 相应事件
 - (void)buttonAddCart:(UIButton *)sender                //购物车按钮事件
 {
-    
-    [UIView animateWithDuration:1 animations:^
+    if (delegate.userHasLogin)
     {
-        viewForNumber.frame = CGRectMake(0, HL - 150, WL, 150);
-    } completion:^(BOOL finished)
-    {}];
+        [UIView animateWithDuration:1 animations:^
+         {
+             viewForNumber.frame = CGRectMake(0, HL - 150, WL, 150);
+         } completion:^(BOOL finished)
+         {}];
+        
+        __block SLBuyViewController *blockSelf = self;            //防止循环引用
+        viewForNumber.buyBlockTest = ^(NSString *strNum)
+        {
+            [blockSelf getNumberViewDown];
+            [blockSelf addGoodsToCart:strNum];
+        };
+    }
     
-    __block SLBuyViewController *blockSelf = self;            //防止循环引用
-    viewForNumber.buyBlockTest = ^(NSString *strNum)
+    else
     {
-        [blockSelf getNumberViewDown];
-        [blockSelf addGoodsToCart:strNum];
-    };
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"用户未登录" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"我再逛逛" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertAction *loginAction = [UIAlertAction actionWithTitle:@"马上登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                                      {
+                                          LoginViewController *loginViewController = [[LoginViewController alloc] init];
+                                          UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+                                          [self presentViewController:navController animated:YES completion:nil];
+                                      }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:loginAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    
+
 }
 
 - (void)buttonBuyNow:(UIButton *)sender                 //立即购买按钮事件
 {
+    if (delegate.userHasLogin)
+    {
+        //NSLog(@"等下，马上就要写这里了");
+        
+        SLPayViewController *payViewController = [[SLPayViewController alloc] init];
+        [self presentViewController:payViewController animated:YES completion:nil];
+    }
     
+    else        //用户未登录的时候提示用户
+    {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"用户未登录" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"我再逛逛" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertAction *loginAction = [UIAlertAction actionWithTitle:@"马上登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                                      {
+                                          LoginViewController *loginViewController = [[LoginViewController alloc] init];
+                                          UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+                                          [self presentViewController:navController animated:YES completion:nil];
+                                      }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:loginAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 - (void)getNumberViewDown                   //将选择数量视图降下去
@@ -298,12 +366,17 @@
 - (void)addGoodsToCart:(NSString *)str                  //添加到购物车要显示的数组中去
 {
     NSLog(@"当前购买的商品数量是 %@",str);
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd";
+    NSDate *date = [NSDate date];
+    NSString *strDate = [dateFormatter stringFromDate:date];
+    //NSLog(@"strDate = %@",strDate);
     
-    //NSDate *date = [NSDate date];
-
-    goodsYouSeeNow.dateStr = @"2016.3.30";
+    goodsYouSeeNow.dateStr = strDate;
     goodsYouSeeNow.countOfNeed = str.intValue;
     [delegate.arrayForCart addObject:goodsYouSeeNow];
+
+
 }
 
 
