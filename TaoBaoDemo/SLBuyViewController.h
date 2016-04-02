@@ -26,5 +26,9 @@
 @property (nonatomic, strong) UITableView *tableView;            //最基础页面
 @property (nonatomic, strong) UIView *viewForTableHeadView;
 
+@property (nonatomic, strong) UIImage *image1;
+@property (nonatomic, strong) UIImage *image2;
+@property (nonatomic, strong) UIImage *image3;
+
 
 @end

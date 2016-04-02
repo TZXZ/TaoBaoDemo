@@ -68,6 +68,9 @@
 		84A1BFC81CA7C38000FCBB1A /* xiaoxi.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A1BFC71CA7C38000FCBB1A /* xiaoxi.png */; };
 		84A1BFCC1CA7EE0600FCBB1A /* SLBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A1BFCB1CA7EE0600FCBB1A /* SLBuyViewController.m */; };
 		84A1BFCF1CA7FCD100FCBB1A /* buy_view_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A1BFCE1CA7FCD100FCBB1A /* buy_view_back.png */; };
+		84A384C21CAE2243002F8E9F /* taobao_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A384C11CAE2243002F8E9F /* taobao_cell.png */; };
+		84A384C61CAE4B3B002F8E9F /* SLPayViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A384C41CAE4B3B002F8E9F /* SLPayViewCell.m */; };
+		84A384C71CAE4B3B002F8E9F /* SLPayViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A384C51CAE4B3B002F8E9F /* SLPayViewCell.xib */; };
 		84D71B941C59FECE00097A55 /* shouye.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D71B931C59FECE00097A55 /* shouye.png */; };
 		84D71B961C59FED200097A55 /* shouye1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D71B951C59FED200097A55 /* shouye1.png */; };
 		84D71B981C59FF0600097A55 /* weitao.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D71B971C59FF0600097A55 /* weitao.png */; };
@@ -263,6 +266,10 @@
 		84A1BFCA1CA7EE0600FCBB1A /* SLBuyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLBuyViewController.h; sourceTree = "<group>"; };
 		84A1BFCB1CA7EE0600FCBB1A /* SLBuyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLBuyViewController.m; sourceTree = "<group>"; };
 		84A1BFCE1CA7FCD100FCBB1A /* buy_view_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buy_view_back.png; sourceTree = "<group>"; };
+		84A384C11CAE2243002F8E9F /* taobao_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taobao_cell.png; sourceTree = "<group>"; };
+		84A384C31CAE4B3B002F8E9F /* SLPayViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPayViewCell.h; sourceTree = "<group>"; };
+		84A384C41CAE4B3B002F8E9F /* SLPayViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLPayViewCell.m; sourceTree = "<group>"; };
+		84A384C51CAE4B3B002F8E9F /* SLPayViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SLPayViewCell.xib; sourceTree = "<group>"; };
 		84D71B931C59FECE00097A55 /* shouye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouye.png; sourceTree = "<group>"; };
 		84D71B951C59FED200097A55 /* shouye1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouye1.png; sourceTree = "<group>"; };
 		84D71B971C59FF0600097A55 /* weitao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weitao.png; sourceTree = "<group>"; };
@@ -517,6 +524,9 @@
 				847A35911CA8CE380052908A /* SLBuyCustomHeadView.m */,
 				84DAE1121CAA120300371763 /* SLBuyNumberView.h */,
 				84DAE1131CAA120400371763 /* SLBuyNumberView.m */,
+				84A384C31CAE4B3B002F8E9F /* SLPayViewCell.h */,
+				84A384C41CAE4B3B002F8E9F /* SLPayViewCell.m */,
+				84A384C51CAE4B3B002F8E9F /* SLPayViewCell.xib */,
 				84A1BFCD1CA7FCB900FCBB1A /* BuyViewResources */,
 			);
 			name = BuyView;
@@ -525,6 +535,7 @@
 		84A1BFCD1CA7FCB900FCBB1A /* BuyViewResources */ = {
 			isa = PBXGroup;
 			children = (
+				84A384C11CAE2243002F8E9F /* taobao_cell.png */,
 				84DF3F571CAD5117009AD7C3 /* button_address.png */,
 				84DF3F551CAD4F1E009AD7C3 /* location_image.png */,
 				84DF3F531CAD4C9B009AD7C3 /* address_frame.png */,
@@ -1052,6 +1063,7 @@
 				84DF3EFC1CAC0721009AD7C3 /* goods_10004.jpg in Resources */,
 				84DF3EEE1CAC0718009AD7C3 /* goods_10010.jpg in Resources */,
 				8402D0E11C995D26008A940A /* anni.jpeg in Resources */,
+				84A384C21CAE2243002F8E9F /* taobao_cell.png in Resources */,
 				8402D0E91C9971E6008A940A /* all_order.png in Resources */,
 				84D71BA61C59FF6A00097A55 /* yonghu1.png in Resources */,
 				84DA9AC01C9D1D49003073B9 /* login_Tencent.png in Resources */,
@@ -1078,6 +1090,7 @@
 				84DF3EF21CAC071B009AD7C3 /* goods_10011.jpg in Resources */,
 				849BE07F1C75561200D8C078 /* RollImage_4.jpg in Resources */,
 				841B07591CA6560F00FC858F /* button40_image.png in Resources */,
+				84A384C71CAE4B3B002F8E9F /* SLPayViewCell.xib in Resources */,
 				84F74C381CA37150004FECCB /* good_goods.png in Resources */,
 				84DF3F111CACC2B4009AD7C3 /* goods_10024.jpg in Resources */,
 				84DA1DB91C9BDD2000F6FC99 /* header.png in Resources */,
@@ -1169,6 +1182,7 @@
 				84DF3ECF1CABAB0C009AD7C3 /* Masonry-dummy.m in Sources */,
 				845946081CA50B1300C203E3 /* SLSectionHeadView.m in Sources */,
 				841B07431CA631F400FC858F /* SLHomeSearchButtonView.m in Sources */,
+				84A384C61CAE4B3B002F8E9F /* SLPayViewCell.m in Sources */,
 				84FC598B1C51CF5400E6512B /* main.m in Sources */,
 				84DA9B961C9ED2C8003073B9 /* ASIFormDataRequest.m in Sources */,
 				84DA9B941C9ED2C8003073B9 /* ASIDataDecompressor.m in Sources */,

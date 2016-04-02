@@ -158,8 +158,8 @@
 - (void)getGoodsMessageFromServer
 {
     //1.确定请求路径
-    //NSString *strURL = [NSString stringWithFormat:@"http://42.96.178.214/php/queryZ.php?number=%d",delegate.numberOfGoods];
-    NSString *strURL = [NSString stringWithFormat:@"http://localhost/queryZ.php?number=%d",delegate.numberOfGoods];
+    NSString *strURL = [NSString stringWithFormat:@"http://42.96.178.214/php/queryZ.php?number=%d",delegate.numberOfGoods];
+    //NSString *strURL = [NSString stringWithFormat:@"http://localhost/queryZ.php?number=%d",delegate.numberOfGoods];
     NSURL *url = [NSURL URLWithString:strURL];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -185,11 +185,11 @@
                   
                   NSLog(@"goodsYouSeeNow.name = %@",goodsYouSeeNow.name);
                   
-                  viewForTableHead.labelDetail.text = goodsYouSeeNow.describe;
-                  viewForTableHead.labelMoneyLow.text = goodsYouSeeNow.price;
-                  viewForTableHead.labelTest1.text = goodsYouSeeNow.postState;
-                  viewForTableHead.labelTest2.text = goodsYouSeeNow.saleState;
-                  viewForTableHead.labelTest3.text = goodsYouSeeNow.addressState;
+//                  viewForTableHead.labelDetail.text = goodsYouSeeNow.describe;
+//                  viewForTableHead.labelMoneyLow.text = goodsYouSeeNow.price;
+//                  viewForTableHead.labelTest1.text = goodsYouSeeNow.postState;
+//                  viewForTableHead.labelTest2.text = goodsYouSeeNow.saleState;
+//                  viewForTableHead.labelTest3.text = goodsYouSeeNow.addressState;
                   
                   //获取第一张图片
                   NSString *strURL1 = [NSString stringWithFormat:@"http://42.96.178.214/img/%d/%@",delegate.numberOfGoods,goodsYouSeeNow.imgAddress1];
@@ -197,7 +197,7 @@
                   NSURLSession *session1 = [NSURLSession sharedSession];
                   NSURLSessionDataTask *dataTask1 = [session1 dataTaskWithURL:url1 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                   {
-                      viewForTableHead.imageView1.image = [UIImage imageWithData:data];
+                      _image1 = [UIImage imageWithData:data];
                       
                       NSLog(@"获取第一张图片成功！");
                   }];
@@ -209,7 +209,7 @@
                   NSURLSession *session2 = [NSURLSession sharedSession];
                   NSURLSessionDataTask *dataTask2 = [session2 dataTaskWithURL:url2 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                  {
-                     viewForTableHead.imageView2.image = [UIImage imageWithData:data];
+                     _image2 = [UIImage imageWithData:data];
                      NSLog(@"获取第二张图片成功！");
                  }];
                   [dataTask2 resume];
@@ -220,7 +220,7 @@
                   NSURLSession *session3 = [NSURLSession sharedSession];
                   NSURLSessionDataTask *dataTask3 = [session3 dataTaskWithURL:url3 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                  {
-                     viewForTableHead.imageView3.image = [UIImage imageWithData:data];
+                     _image3 = [UIImage imageWithData:data];
                      NSLog(@"获取第三张图片成功！");
                  }];
                   [dataTask3 resume];
@@ -236,14 +236,45 @@
     
     //5.执行任务
     [dataTask resume];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(soSlowToLoadMessage:) userInfo:nil repeats:YES];
 }
 
 
-#pragma mark -- 测试一些方法用
-- (void)soSlowToLoadMessage:(NSDictionary *)dic
+#pragma mark -- 将网络请求完成的数据另外赋值，不然延迟加载很坑爹
+- (void)soSlowToLoadMessage:(NSTimer *)timer
 {
-    //NSLog(@"dic price = %@",[dic objectForKey:@"price"]);
-    //viewForTableHead.labelMoneyLow.text = [dic objectForKey:@"price"];
+    if (goodsYouSeeNow.name != nil)
+    {
+        [timer invalidate];
+        NSLog(@"物品数据详情数据请求成功，我要开始加载");
+        
+        viewForTableHead.labelDetail.text = goodsYouSeeNow.describe;
+        viewForTableHead.labelMoneyLow.text = goodsYouSeeNow.price;
+        viewForTableHead.labelTest1.text = goodsYouSeeNow.postState;
+        viewForTableHead.labelTest2.text = goodsYouSeeNow.saleState;
+        viewForTableHead.labelTest3.text = goodsYouSeeNow.addressState;
+        
+    }
+    if (_image1 != nil)
+    {
+        viewForTableHead.imageView1.image = _image1;
+    }
+    if (_image2 != nil)
+    {
+        viewForTableHead.imageView2.image = _image2;
+    }
+    if (_image3 != nil)
+    {
+        viewForTableHead.imageView3.image = _image3;
+    }
+    
+    if (goodsYouSeeNow.name != nil && _image1 != nil && _image2 != nil && _image3 != nil)
+    {
+        [timer invalidate];
+    }
+    
+    
 }
 
 
@@ -329,9 +360,19 @@
     if (delegate.userHasLogin)
     {
         //NSLog(@"等下，马上就要写这里了");
+        [UIView animateWithDuration:1 animations:^
+         {
+             viewForNumber.frame = CGRectMake(0, HL - 150, WL, 150);
+         } completion:^(BOOL finished)
+         {}];
         
-        SLPayViewController *payViewController = [[SLPayViewController alloc] init];
-        [self presentViewController:payViewController animated:YES completion:nil];
+        __weak SLBuyViewController *blockSelf = self;            //防止循环引用
+        viewForNumber.buyBlockTest = ^(NSString *strNum)
+        {
+            NSLog(@"这里代码执行了吗");
+            //[blockSelf getNumberViewDown];
+            [blockSelf buyGoodsNow:strNum];
+        };
     }
     
     else        //用户未登录的时候提示用户
@@ -377,6 +418,15 @@
     [delegate.arrayForCart addObject:goodsYouSeeNow];
 
 
+}
+
+- (void)buyGoodsNow:(NSString *)str           //跳转到购物详情页面
+{
+    goodsYouSeeNow.countOfNeed = str.intValue;
+    
+    SLPayViewController *payViewController = [[SLPayViewController alloc] init];
+    payViewController.goodsYouPayNow = goodsYouSeeNow;
+    [self presentViewController:payViewController animated:YES completion:nil];
 }
 
 

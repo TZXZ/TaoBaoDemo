@@ -7,7 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SLGoodsDetail.h"
+#import "AppDelegate.h"
 
-@interface SLPayViewController : UIViewController
+@interface SLPayViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+{
+    AppDelegate *delegate;
+}
+
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) SLGoodsDetail *goodsYouPayNow;
+@property (weak, nonatomic) IBOutlet UILabel *labelPayMoney;
+@property (weak, nonatomic) IBOutlet UILabel *labelName;
+@property (weak, nonatomic) IBOutlet UILabel *labelPhone;
+
+
+- (IBAction)viewBackAction:(UIBarButtonItem *)sender;
+- (IBAction)payMoneyAction:(UIButton *)sender;
+
 
 @end

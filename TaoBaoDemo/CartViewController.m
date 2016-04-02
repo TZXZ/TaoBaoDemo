@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 
 #define TAG_BACKGROUNDVIEW 100
+#define Botton_View_Tag  101
 
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 #define SCREEN_WIDTH  [[UIScreen mainScreen] bounds].size.width
@@ -77,6 +78,9 @@ blue:((float)(0xED5565 & 0xFF))/255.0 alpha:1.0]
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    //判断购物车是否应该显示数据
+    [self setupMainView];
+    
     //每次进入购物车的时候把已选择的置空
     [selectGoods removeAllObjects];
     isSelect = NO;
@@ -109,24 +113,48 @@ blue:((float)(0xED5565 & 0xFF))/255.0 alpha:1.0]
     //当购物车为空时，显示默认视图
     if (delegate.arrayForCart.count == 0)                     
     {
+        UIView *bottonView = [self.view viewWithTag:Botton_View_Tag];
+        if (bottonView != nil)
+        {
+            bottonView.hidden = YES;
+        }
+        
+        UIView *vi = [self.view viewWithTag:TAG_BACKGROUNDVIEW];  //判断是否存在“啥都没有”，有就新增
+        if (vi != nil)
+        {
+            return ;
+        }
+        
         [self cartEmptyShow];
     }
     //当购物车不为空时，tableView展示
     else
     {
+        UIView *bottonView = [self.view viewWithTag:Botton_View_Tag];
+        if (bottonView != nil)
+        {
+            bottonView.hidden = NO;
+        }
+        
         UIView *vi = [self.view viewWithTag:TAG_BACKGROUNDVIEW];
-        [vi removeFromSuperview];           //这样移除真的好吗，待定
+        [vi removeFromSuperview];           //这样移除真的好吗
         
-        myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 50 - 49) style:UITableViewStylePlain];
-        myTableView.delegate = self;
-        myTableView.dataSource = self;
-        myTableView.rowHeight = 100;
-        myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        myTableView.backgroundColor = RGBCOLOR(245, 246, 248);
-        
-        [self.view addSubview:myTableView];
-        
-        [self setupBottomView];
+        if (myTableView != nil)
+        {
+            return ;
+        }else
+        {
+            myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 50 - 49) style:UITableViewStylePlain];
+            myTableView.delegate = self;
+            myTableView.dataSource = self;
+            myTableView.rowHeight = 100;
+            myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            myTableView.backgroundColor = RGBCOLOR(245, 246, 248);
+            
+            [self.view addSubview:myTableView];
+            
+            [self setupBottomView];
+        }
     }
 }
 
@@ -175,6 +203,7 @@ blue:((float)(0xED5565 & 0xFF))/255.0 alpha:1.0]
 {
     //底部视图的背景
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50 - 49, SCREEN_WIDTH, 50)];
+    bgView.tag = Botton_View_Tag;
     [self.view addSubview:bgView];
     
     UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
@@ -274,9 +303,12 @@ blue:((float)(0xED5565 & 0xFF))/255.0 alpha:1.0]
     [self countPrice];
 }
 
-- (void)goPayBtnClick         //提交订单按钮事件
+- (void)goPayBtnClick         //提交订单按钮事件  待写...
 {
-    NSLog(@"去结算！");
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"支付功能正在开发中，请稍后再试" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好吧" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 

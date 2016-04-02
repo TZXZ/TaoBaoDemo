@@ -70,7 +70,7 @@
         
         _labelDetail = [[UILabel alloc] initWithFrame:CGRectMake(0 + 10, widthZ * 0.8 + 10, widthZ - 40 - 60, 40)];
         _labelDetail.numberOfLines = 2;
-        _labelDetail.text = @"包邮fragment藤原浩黑色闪电皮纹贴纸iPhone6手机贴纸";          //记得待会从AppDelegate 里面取数
+        _labelDetail.text = @"正在努力加载中...";          //记得待会从AppDelegate 里面取数
         _labelDetail.font = [UIFont systemFontOfSize:15.0];
         [self addSubview:_labelDetail];                              //添加商品详情文本框
         
@@ -95,7 +95,7 @@
         [self addSubview:_labelMoneySign];
         
         _labelMoneyLow = [[UILabel alloc] initWithFrame:CGRectMake(0 + 10 + 20 + 5, widthZ * 0.8 + 40 + 10 + 10, 60, 20)];
-        _labelMoneyLow.text = @"8522.0";
+        _labelMoneyLow.text = @"0.00";
         _labelMoneyLow.textColor = [UIColor colorWithRed:255/255.0 green:74/255.0 blue:26/255.0 alpha:1];
         [self addSubview:_labelMoneyLow];
         

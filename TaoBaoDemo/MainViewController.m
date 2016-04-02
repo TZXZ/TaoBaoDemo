@@ -335,7 +335,7 @@
     {
         static NSString *cellID = @"SectionTwo";
         SLHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        cell.delegate = self;         //签协议
+        //cell.delegate = self;         //签协议   用block做
         
         if (cell == nil)
         {
@@ -376,6 +376,12 @@
             [cell.button8 setImage:[_dicForImage objectForKey:@"image25.png"] forState:UIControlStateNormal];
         }
         
+        __weak MainViewController *weakSelf = self;
+        cell.ForSectionTwoCell = ^()
+        {
+            SLBuyViewController *buyViewController = [[SLBuyViewController alloc] init];
+            [weakSelf presentViewController:buyViewController animated:YES completion:nil];
+        };
         
         return cell;
     }

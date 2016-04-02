@@ -274,6 +274,11 @@
     {
         [self.delegate actWhenUserTouchThisCell];
     }
+    
+    if (self.ForSectionTwoCell)
+    {
+        self.ForSectionTwoCell();
+    }
 }
 
 

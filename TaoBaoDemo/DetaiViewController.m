@@ -79,6 +79,7 @@
     {
         appDelegate.userHasLogin = NO;
         appDelegate.userInfomation = [[UserInfomation alloc] init];
+        appDelegate.arrayForCart = [[NSMutableArray alloc] init];
         
         [self dismissViewControllerAnimated:YES completion:nil];
     }];

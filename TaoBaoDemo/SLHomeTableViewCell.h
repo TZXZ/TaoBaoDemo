@@ -25,6 +25,7 @@
 
 
 @property (nonatomic, assign) id<SLHomeTableViewCellDelegate> delegate;
+@property (nonatomic, copy) void (^ForSectionTwoCell)();
 
 @property (assign, nonatomic) float widthLength;
 @property (strong, nonatomic) UIImageView *imageViewHead;
