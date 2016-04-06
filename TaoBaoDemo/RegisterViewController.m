@@ -8,8 +8,8 @@
 
 #import "RegisterViewController.h"
 #import <SMS_SDK/SMSSDK.h>
-#import "ASIFormDataRequest.h"
-#import "ASIHTTPRequest.h"
+//#import "ASIFormDataRequest.h"
+//#import "ASIHTTPRequest.h"
 
 #define WL self.view.frame.size.width
 #define HL self.view.frame.size.height
@@ -26,7 +26,7 @@
     self.title = @"免费注册";
     self.view.frame = [[UIScreen mainScreen] bounds];
     
-    //新建手机号、验证码、两次密码输入框和获取验证码按钮
+//新建手机号、验证码、两次密码输入框和获取验证码按钮
     int tempL = WL / 2;
     self.textFieldPhone.delegate = self;
     self.textFieldPhone = [[UITextField alloc] initWithFrame:CGRectMake(tempL - 150, 100, 300, 40)];
@@ -72,6 +72,10 @@
     //初始化姓名文本框、两个密码文本框和注册按钮
     self.textFieldName = [[UITextField alloc] initWithFrame:CGRectMake(tempL - 150, 220, 300, 40)];
     self.textFieldName.placeholder = @"请输入昵称";
+    self.textFieldName.leftViewMode = UITextFieldViewModeAlways;
+    UIImageView *imageViewName = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    imageViewName.image = [UIImage imageNamed:@"name_image.png"];
+    self.textFieldName.leftView = imageViewName;
     UIView *lineX = [[UIView alloc] initWithFrame:CGRectMake(0, 39, 300, 1)];
     lineX.backgroundColor = [UIColor grayColor];
     [self.textFieldName addSubview:lineX];
@@ -87,6 +91,10 @@
     self.textFieldPassword1.hidden = YES;
     self.textFieldPassword1.secureTextEntry = YES;
     self.textFieldPassword1.delegate = self;
+    self.textFieldPassword1.leftViewMode = UITextFieldViewModeAlways;
+    UIImageView *imageViewPassword1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    imageViewPassword1.image = [UIImage imageNamed:@"password_image.png"];
+    self.textFieldPassword1.leftView = imageViewPassword1;
     [self.view addSubview:self.textFieldPassword1];             //添加第一个密码文本框
     
     self.textFieldPassword2 = [[UITextField alloc] initWithFrame:CGRectMake(tempL - 150, 220, 300, 40)];
@@ -97,6 +105,10 @@
     self.textFieldPassword2.hidden = YES;
     self.textFieldPassword2.secureTextEntry = YES;
     self.textFieldPassword2.delegate = self;
+    self.textFieldPassword2.leftViewMode = UITextFieldViewModeAlways;
+    UIImageView *imageViewPassoword2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    imageViewPassoword2.image = [UIImage imageNamed:@"password_image.png"];
+    self.textFieldPassword2.leftView = imageViewPassoword2;
     [self.view addSubview:self.textFieldPassword2];             //添加第二个密码文本框
     
     buttonRegister = [[UIButton alloc] initWithFrame:CGRectMake(20, 400, WL - 40, 40)];
@@ -195,6 +207,8 @@
 - (void)buttonRegister
 {
     [self.view endEditing:YES];
+    self.responseData = [[NSMutableData alloc] init];
+    
     if (self.textFieldPassword1.text.length >= 6 && [self.textFieldPassword2.text isEqualToString:self.textFieldPassword1.text] && self.textFieldName.text.length != 0)
     {
         //NSLog(@"用户注册信息合法");
@@ -205,12 +219,13 @@
         NSString *strURL = [NSString stringWithFormat:@"http://www.austrator.com/xbwu/insertX.php?phone=%@&name=%@&password=%@",self.textFieldPhone.text,self.textFieldName.text,self.textFieldPassword1.text];
         strURL = [strURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
         NSURL *url = [NSURL URLWithString:strURL];
-        ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:url];
-        [request setRequestMethod:@"GET"];
-        request.delegate = self;
-        [request startAsynchronous];          //开始异步请求
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
         
-//        label.hidden = YES;
+        //开始网络请求
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request];
+        [dataTask resume];
         
     }else
     {
@@ -244,33 +259,68 @@
     return YES;
 }
 
-
-#pragma mark -- RequestDelegate 数据库操作回调方法
-- (void)requestFinished:(ASIFormDataRequest *)request
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    NSArray *array = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:nil];
-    if ([[array lastObject] boolValue])
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    self.view.frame = CGRectMake(0, -100, WL, HL);
+    [UIView commitAnimations];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    self.view.frame = CGRectMake(0, 0, WL, HL);
+    [UIView commitAnimations];
+}
+
+
+#pragma mark -- NSURLSession data delegate
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
+{
+    completionHandler(NSURLSessionResponseAllow);
+}
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+{
+    [self.responseData appendData:data];
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    //当请求完成的时候会调用该方法，如果请求失败，则error有值
+    if (error == nil)
     {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"用户注册成功,点击确定3秒后返回上一界面" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-           {
-               sleep(3);
-               [self.navigationController popViewControllerAnimated:YES];
-           }];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
+        NSArray *array = [NSJSONSerialization JSONObjectWithData:_responseData options:NSJSONReadingMutableContainers error:nil];
+        if ([[array lastObject] boolValue])
+        {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"用户注册成功,点击确定3秒后返回上一界面" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+               {
+                   sleep(3);
+                   [self.navigationController popViewControllerAnimated:YES];
+               }];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }else
+        {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"用户之前已经注册过，无须再次注册，点击确定后3秒返回上一界面" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                {
+                    sleep(3);
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
     }else
     {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"用户之前已经注册过，无须再次注册，点击确定后3秒返回上一界面" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-            {
-                sleep(3);
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"注册失败" message:@"可能是手机网络有问题或者服务器繁忙" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"不好" style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }
-    
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "DetaiViewController.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 #define WL self.view.frame.size.width
 #define HL self.view.frame.size.height
@@ -23,6 +24,7 @@
     self.title = @"个人信息";
     self.view.frame = [[UIScreen mainScreen] bounds];
     appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    self.automaticallyAdjustsScrollViewInsets = YES;
     
     //添加导航控制器上面的左侧返回button
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
@@ -92,17 +94,49 @@
 #pragma mark -- UITableViewDataSourece
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 1)
+    {
+        return 2;
+    }
+    
     return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellID = @"cellID";
+    
+    if (indexPath.section == 1)
+    {
+        static NSString *cellID1 = @"cellID1";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID1];
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID1];
+        }
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        switch (indexPath.row)
+        {
+            case 0:
+                cell.textLabel.text = @"清除缓存";
+                break;
+                
+            case 1:
+                cell.textLabel.text = @"版本信息";
+                break;
+                
+            default:
+                break;
+        }
+        
+        return cell;
+    }
+    
+    static NSString *cellID = @"cellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (cell == nil)
     {
@@ -165,6 +199,11 @@
 #pragma mark -- UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 1)
+    {
+        return 44.0;
+    }
+    
     if (indexPath.row == 0)
     {
         return 80.0;
@@ -176,39 +215,84 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.editing = YES;
     
-    switch (indexPath.row)
+    if (indexPath.section == 0)
     {
-        case 0:
-            [self presentViewController:imagePickerController animated:YES completion:nil];
-            break;
-            
-        case 1:
-            NSLog(@"点击了淘宝昵称");
-            break;
-            
-        case 2:
-            NSLog(@"点击了密码");
-            break;
-            
-        case 3:
-            NSLog(@"性别");
-            break;
-            
-        case 4:
-            NSLog(@"生日");
-            break;
-            
-        case 5:
-            NSLog(@"收货地址");
-            break;
-            
-        default:
-            break;
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.editing = YES;
+        
+        switch (indexPath.row)
+        {
+            case 0:
+                [self presentViewController:imagePickerController animated:YES completion:nil];
+                break;
+                
+            case 1:
+                NSLog(@"点击了淘宝昵称");
+                break;
+                
+            case 2:
+                NSLog(@"点击了密码");
+                break;
+                
+            case 3:
+                NSLog(@"性别");
+                break;
+                
+            case 4:
+                NSLog(@"生日");
+                break;
+                
+            case 5:
+                NSLog(@"收货地址");
+                break;
+                
+            default:
+                break;
+        }
     }
+    else if (indexPath.section == 1)
+    {
+        if (indexPath.row == 0)
+        {
+            //NSLog(@"这个是清除缓存");
+            [SVProgressHUD show];
+            
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^
+                           {
+                               //清除缓存
+                               NSString *catch = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                               NSLog(@"catch = %@",catch);
+                               NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:catch];
+                               fileCount = (int)[files count];
+                               for (NSString *p in files)
+                               {
+                                   NSError *error;
+                                   NSString *path = [catch stringByAppendingPathComponent:p];
+                                   if ([[NSFileManager defaultManager] fileExistsAtPath:path])
+                                   {
+                                       [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+                                   }
+                               }
+                           });
+            
+            [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(stopProgressAction:) userInfo:nil repeats:NO];
+        }
+        else if (indexPath.row == 1)
+        {
+            NSLog(@"这个是版本信息");
+        }
+    }
+}
+
+- (void)stopProgressAction:(NSTimer *)timer
+{
+    [timer invalidate];
+
+    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"成功清理了%d个文件",fileCount]];
+    [SVProgressHUD dismissWithDelay:2];
 }
 
 

@@ -199,7 +199,7 @@
                 <constraint firstItem="owl-1F-lrE" firstAttribute="top" secondItem="D2K-zW-VUm" secondAttribute="bottom" id="yTN-lA-hMl"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="796" y="309"/>
+            <point key="canvasLocation" x="609" y="352"/>
         </view>
     </objects>
     <resources>

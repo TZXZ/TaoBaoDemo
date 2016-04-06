@@ -17,20 +17,20 @@
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 #define SCREEN_WIDTH  [[UIScreen mainScreen] bounds].size.width
 
-//16进制RGB的颜色转换
-#define kUIColorFromRGB(rgbValue) [UIColor \
-colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
-blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
-//R G B 颜色
-#define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
-
-//红色
-#define BASECOLOR_RED [UIColor \
-colorWithRed:((float)((0xED5565 & 0xFF0000) >> 16))/255.0 \
-green:((float)((0xED5565 & 0xFF00) >> 8))/255.0 \
-blue:((float)(0xED5565 & 0xFF))/255.0 alpha:1.0]
+////16进制RGB的颜色转换
+//#define kUIColorFromRGB(rgbValue) [UIColor \
+//colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+//green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+//blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+//
+////R G B 颜色
+//#define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+//
+////红色
+//#define BASECOLOR_RED [UIColor \
+//colorWithRed:((float)((0xED5565 & 0xFF0000) >> 16))/255.0 \
+//green:((float)((0xED5565 & 0xFF00) >> 8))/255.0 \
+//blue:((float)(0xED5565 & 0xFF))/255.0 alpha:1.0]
 
 
 
@@ -189,13 +189,14 @@ blue:((float)(0xED5565 & 0xFF))/255.0 alpha:1.0]
     btn.backgroundColor = [UIColor greenColor];
     [btn setTitle:@"去首页" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(goToMainmenuView) forControlEvents:UIControlEventTouchUpInside];
-    //[backgroundView addSubview:btn];            //没想好怎样跳转，先不加这个按钮
+    [backgroundView addSubview:btn];            //没想好怎样跳转，先不加这个按钮
 }
 
 //购物车为空的时候去首页购物的按钮
 -(void)goToMainmenuView
 {
     //NSLog(@"去首页");
+    self.tabBarController.selectedIndex = 0;     //手动在tabBarController 控制的视图控制器之间跳转
 }
 
 #pragma mark -- 设置有商品时的底部视图

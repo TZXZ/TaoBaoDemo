@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegisterViewController : UIViewController<UITextFieldDelegate>
+@interface RegisterViewController : UIViewController<UITextFieldDelegate, NSURLSessionDataDelegate>
 {
     UIButton *buttonSendSMS;
     UIButton *buttonNextStep;
@@ -22,6 +22,8 @@
 @property (strong, nonatomic) UITextField *textFieldName;
 @property (strong, nonatomic) UITextField *textFieldPassword1;
 @property (strong, nonatomic) UITextField *textFieldPassword2;
+
+@property (strong, nonatomic) NSMutableData *responseData;
 
 
 @end

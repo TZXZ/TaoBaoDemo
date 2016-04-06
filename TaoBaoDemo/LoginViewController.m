@@ -9,9 +9,8 @@
 #import "LoginViewController.h"
 #import "CateAnimationLogin.h"
 #import "RegisterViewController.h"
-#import "ASIFormDataRequest.h"
-#import "ASIHTTPRequest.h"
 #import "AppDelegate.h"
+#import "SLPasswordBackController.h"
 
 #define WL self.view.frame.size.width
 #define HL self.view.frame.size.height
@@ -36,18 +35,18 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(waitingForYou) name:UITextFieldTextDidChangeNotification object:nil];
     appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
-    //添加导航控制器上面的左侧返回button
+//添加导航控制器上面的左侧返回button
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 40, 40)];
     [leftButton setImage:[UIImage imageNamed:@"view_back.png"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(viewBackAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = leftBarButton;
     
-    //添加用户名和密码模块
+//添加用户名和密码模块
     loginView = [[CateAnimationLogin alloc] initWithFrame:CGRectMake(0, 0, WL, 400)];
     [self.view addSubview:loginView];
     
-    //添加登录按钮以及注册按钮和找回密码按钮、第三方登录按纽
+//添加登录按钮以及注册按钮和找回密码按钮、第三方登录按纽
     self.buttonLogin = [[UIButton alloc] initWithFrame:CGRectMake(20, 400, WL - 40, 40)];
     [self.buttonLogin setBackgroundImage:[UIImage imageNamed:@"login_button.png"] forState:UIControlStateNormal];
     self.buttonLogin.enabled = NO;
@@ -124,17 +123,24 @@
 - (void)buttonLoginAction:(UIButton *)sender      //登录按钮
 {
     NSLog(@"用户点击了登录 !");
+    self.responseData = [[NSMutableData alloc] init];
+    
     NSString *strURL = [NSString stringWithFormat:@"http://www.austrator.com/xbwu/queryX.php?phone=%@",loginView.userNameTextField.text];
     NSURL *url = [NSURL URLWithString:strURL];
-    ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:url];
-    [request setRequestMethod:@"GET"];
-    request.delegate = self;
-    [request startAsynchronous];       //开始异步请求
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request];
+    [dataTask resume];
 }
 
 - (void)buttonForPasswordBackAction
 {
-    NSLog(@"用户点击了找回密码");
+    //NSLog(@"用户点击了找回密码");
+    SLPasswordBackController *passwordController = [[SLPasswordBackController alloc] init];
+    [self.navigationController pushViewController:passwordController animated:YES];
 }
 
 - (void)buttonRegisterAction            //注册按钮
@@ -144,7 +150,7 @@
     [self.navigationController pushViewController:reViewController animated:YES];
 }
 
-//第三方登录
+//第三方登录  QQ  微信  微博
 - (void)buttonForTencent
 {
     NSLog(@"用户点击了腾讯登录");
@@ -168,39 +174,59 @@
 }
 
 
-#pragma mark -- RequestDelegate(ASIHTTPRequest)
-- (void)requestFinished:(ASIFormDataRequest *)request
+#pragma mark -- NSURLSession data delegate
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
 {
-    NSError *error;
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
-    NSString *password = [dic objectForKey:@"password"];
-    if ([password isEqualToString:loginView.PassWordTextField.text])
+    completionHandler(NSURLSessionResponseAllow);
+}
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+{
+    [self.responseData appendData:data];
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    //当请求完成的时候会调用该方法，如果请求失败，则error有值
+    if (error == nil)
     {
-        //NSLog(@"登录成功! password = %@",password);
-        appDelegate.userInfomation.phone = [dic objectForKey:@"phone"];
-        appDelegate.userInfomation.name = [dic objectForKey:@"name"];
-        appDelegate.userInfomation.password = [dic objectForKey:@"password"];
-        appDelegate.userInfomation.sex = [dic objectForKey:@"sex"];
-        appDelegate.userInfomation.birthday = [dic objectForKey:@"birthday"];
-        appDelegate.userInfomation.address1 = [dic objectForKey:@"address1"];
-        appDelegate.userInfomation.address2 = [dic objectForKey:@"address2"];
-        appDelegate.userInfomation.address3 = [dic objectForKey:@"address3"];
-        appDelegate.userInfomation.address4 = [dic objectForKey:@"address4"];
-        appDelegate.userInfomation.address5 = [dic objectForKey:@"address5"];
-        appDelegate.userHasLogin = YES;
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您已登录成功" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *viewBackAction = [UIAlertAction actionWithTitle:@"点击返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+        //解析JSON 数据
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:_responseData options:NSJSONReadingMutableContainers error:&error];
+        NSString *password = [dic objectForKey:@"password"];
+        if ([password isEqualToString:loginView.PassWordTextField.text])
         {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }];
-        [alertController addAction:viewBackAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-        
+            //NSLog(@"登录成功! password = %@",password);
+            appDelegate.userInfomation.phone = [dic objectForKey:@"phone"];
+            appDelegate.userInfomation.name = [dic objectForKey:@"name"];
+            appDelegate.userInfomation.password = [dic objectForKey:@"password"];
+            appDelegate.userInfomation.sex = [dic objectForKey:@"sex"];
+            appDelegate.userInfomation.birthday = [dic objectForKey:@"birthday"];
+            appDelegate.userInfomation.address1 = [dic objectForKey:@"address1"];
+            appDelegate.userInfomation.address2 = [dic objectForKey:@"address2"];
+            appDelegate.userInfomation.address3 = [dic objectForKey:@"address3"];
+            appDelegate.userInfomation.address4 = [dic objectForKey:@"address4"];
+            appDelegate.userInfomation.address5 = [dic objectForKey:@"address5"];
+            appDelegate.userHasLogin = YES;
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您已登录成功" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *viewBackAction = [UIAlertAction actionWithTitle:@"点击返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                                             {
+                                                 [self dismissViewControllerAnimated:YES completion:nil];
+                                             }];
+            [alertController addAction:viewBackAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+        }else
+        {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"错误" message:@"用户名或者密码错误" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好" style:0 handler:nil];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
     }else
     {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"错误" message:@"用户名或者密码错误" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好" style:0 handler:nil];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"登录失败" message:@"可能是手机网络有问题或者服务器繁忙" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"不好" style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }

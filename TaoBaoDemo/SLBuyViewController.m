@@ -143,6 +143,7 @@
     UIButton *buttonAddCart = [[UIButton alloc] initWithFrame:CGRectMake(147, HL - 49, tempL, 49)];
     buttonAddCart.backgroundColor = [UIColor colorWithRed:255/255.0 green:74/255.0 blue:26/255.0 alpha:1];
     [buttonAddCart setTitle:@"加入购物车" forState:UIControlStateNormal];
+    buttonAddCart.titleLabel.font = [UIFont systemFontOfSize:15.0];
     buttonAddCart.titleLabel.textColor = [UIColor whiteColor];
     [buttonAddCart addTarget:self action:@selector(buttonAddCart:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buttonAddCart];               //添加加入购物车按钮
@@ -150,6 +151,7 @@
     UIButton *buttonBuyNow = [[UIButton alloc] initWithFrame:CGRectMake(147 + tempL, HL - 49, tempL, 49)];
     buttonBuyNow.backgroundColor = [UIColor redColor];
     [buttonBuyNow setTitle:@"立即购买" forState:UIControlStateNormal];
+    buttonBuyNow.titleLabel.font = [UIFont systemFontOfSize:15.0];
     buttonBuyNow.titleLabel.textColor = [UIColor whiteColor];
     [buttonBuyNow addTarget:self action:@selector(buttonBuyNow:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buttonBuyNow];               //添加加入购物车按钮
@@ -171,7 +173,7 @@
               if (!error)
               {
                   NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                  NSLog(@"dic = %@",dic);
+                  //NSLog(@"dic = %@",dic);      //获取当前商品所有信息
                   goodsYouSeeNow.name = [dic objectForKey:@"name"];
                   goodsYouSeeNow.number = [dic objectForKey:@"number"];
                   goodsYouSeeNow.price = [dic objectForKey:@"price"];

@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import "WHScrollAndPageView.h"
 #import "SLHomeTableViewCell.h"
 
 @class SLSectionHeadView;
 
-@interface MainViewController : UIViewController<WHScrollViewViewDelegate,UITableViewDataSource,UITableViewDelegate,NSURLSessionDataDelegate, SLHomeTableViewCellDelegate>
+@interface MainViewController : UIViewController<WHScrollViewViewDelegate,UITableViewDataSource,UITableViewDelegate,NSURLSessionDataDelegate, SLHomeTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     SLSectionHeadView *headViewLast;
 }

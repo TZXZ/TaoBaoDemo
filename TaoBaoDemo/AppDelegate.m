@@ -15,7 +15,7 @@
 #import <SMS_SDK/SMSSDK.h>
 
 
-//SMSSDK官网公共key
+//SMSSDK提供的key
 #define appkey @"10acd9e36f2ab"
 #define app_secrect @"c5f59080a700fa82bc2535fb3171d0ce"
 

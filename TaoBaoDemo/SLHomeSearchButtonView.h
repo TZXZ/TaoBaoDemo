@@ -11,6 +11,8 @@
 @interface SLHomeSearchButtonView : UIView
 
 @property (nonatomic, strong) UILabel *labelMessage;
+@property (nonatomic, copy) void (^cameraButtonBlock)();
+@property (nonatomic, copy) void (^searchButtonBlock)();
 
 
 @end

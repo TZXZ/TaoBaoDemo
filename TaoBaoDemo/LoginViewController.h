@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 @class AppDelegate;
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController <NSURLSessionDataDelegate>
 {
     AppDelegate *appDelegate;
 }
 
+
 @property (strong, nonatomic) UIButton *buttonLogin;
+@property (strong, nonatomic) NSMutableData *responseData;
+
 
 @end

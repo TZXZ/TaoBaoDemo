@@ -12,6 +12,7 @@
 @interface DetaiViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     AppDelegate *appDelegate;
+    __block int fileCount;
 }
 
 

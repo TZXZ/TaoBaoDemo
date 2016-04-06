@@ -12,11 +12,15 @@
 #import "SLSectionHeadView.h"
 #import "SLHomeSearchButtonView.h"
 #import "SLBuyViewController.h"
+#import "SLSearchViewController.h"
+#import "SLNewsViewController.h"
+
+#import "SubLBXScanViewController.h"
 
 #define WL self.view.frame.size.width
 #define HL self.view.frame.size.height
 #define NUM 5                                   //滚动广告的图片数量
-#define NUM_LoadImage 32
+#define NUM_LoadImage 32                        //商品图片数量
 
 @interface MainViewController ()
 
@@ -39,6 +43,7 @@
     [myToolBar addSubview:viewForToolBar];                    //将背景添加到myToolBar上面去
     //初始化左边的扫一扫按钮
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [leftButton addTarget:self action:@selector(scanButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [leftButton setImage:[UIImage imageNamed:@"saoyisao.png"] forState:UIControlStateNormal];
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(9, 30, 40, 20)];
@@ -57,9 +62,18 @@
     [rightLabel setTextAlignment:NSTextAlignmentCenter];
     rightLabel.font = [UIFont systemFontOfSize:9.0];
     
-    //初始化搜索按钮
-    SLHomeSearchButtonView *SearchButtonView = [[SLHomeSearchButtonView alloc] initWithFrame:CGRectMake(80, 0, WL - 160, 44)];
-    [myToolBar addSubview:SearchButtonView];                 //添加搜索按钮
+//初始化搜索按钮
+    SLHomeSearchButtonView *searchButtonView = [[SLHomeSearchButtonView alloc] initWithFrame:CGRectMake(80, 0, WL - 160, 44)];
+    __weak MainViewController *blockSelf = self;
+    searchButtonView.cameraButtonBlock = ^()
+    {
+        [blockSelf cameraAction];
+    };
+    searchButtonView.searchButtonBlock = ^()
+    {
+        [blockSelf searchAction];
+    };
+    [myToolBar addSubview:searchButtonView];                 //添加搜索按钮
     
     
     //创建一个toolBar 弹簧
@@ -138,6 +152,10 @@
     self.imageViewNews = [[UIImageView alloc] initWithFrame:CGRectMake(120, 5, WL - 100 - 20 - 20, 50)];
     [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(startRotatingNews) userInfo:nil repeats:YES];
     self.imageViewNews.image = [UIImage imageNamed:@"rotating_news_0.png"];
+    _imageViewNews.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToWebForNews)];
+    tapRecognizer.numberOfTapsRequired = 1;
+    [_imageViewNews addGestureRecognizer:tapRecognizer];
     [self.viewForRotatingNews addSubview:self.imageViewNews];                 //将右边的imageView 添加到新闻滚动视图上面去
     [self.viewForTableHeadView addSubview:self.viewForRotatingNews];          //将新闻滚动视图添加到表头视图上面去
     
@@ -172,6 +190,41 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self.whView shouldAutoShow:YES];
+}
+
+
+#pragma mark -- scan button action  扫一扫按钮事件   以及   相机按钮   以及搜索按钮
+- (void)scanButtonAction:(UIButton *)sender
+{
+    //NSLog(@"扫一扫");
+    SubLBXScanViewController *viewController = [SubLBXScanViewController new];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+- (void)cameraAction
+{
+    //先设定sourceType为相机，然后判断相机是否可用（ipod）没相机，不可用将sourceType设定为相片库
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+    {
+        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    //sourceType = UIImagePickerControllerSourceTypeCamera; //照相机
+    //sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //图片库
+    //sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum; //保存的相片
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];//初始化
+    picker.delegate = self;
+    picker.allowsEditing = YES;//设置可编辑
+    picker.sourceType = sourceType;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)searchAction
+{
+    SLSearchViewController *searchViewController = [[SLSearchViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 
@@ -231,10 +284,15 @@
         default:
             break;
     }
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您现在点击的以及这周围的10个圆形按钮都还没有写事件，请尝试其他按钮" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 
-#pragma mark -- 开始新闻滚动事件 startRotatingNews
+#pragma mark -- 开始新闻滚动事件 startRotatingNews    以及    新闻页面的跳转
 - (void)startRotatingNews
 {
     self.numberNewsPage += 1;
@@ -248,6 +306,15 @@
     animation.subtype = kCATransitionFromTop;
     [self.imageViewNews.layer addAnimation:animation forKey:@"animation"];
     self.imageViewNews.image = [UIImage imageNamed:[NSString stringWithFormat:@"rotating_news_%d.png",self.numberNewsPage]];
+}
+
+- (void)moveToWebForNews
+{
+    //NSLog(@"我要去新闻页面了！");
+    
+    SLNewsViewController *newsController = [[SLNewsViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:newsController];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 
@@ -444,6 +511,7 @@
     
     return cell;
 }
+
 
 #pragma mark -- TableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

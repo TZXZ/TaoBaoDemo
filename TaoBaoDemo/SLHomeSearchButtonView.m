@@ -65,12 +65,20 @@
 
 - (void)buttonSearchAction:(UIButton *)sender
 {
-    NSLog(@"这个是搜索按钮");
+    //NSLog(@"这个是搜索按钮");
+    if (self.searchButtonBlock)
+    {
+        self.searchButtonBlock();
+    }
 }
 
 - (void)buttonCameraAction:(UIButton *)sender
 {
-    NSLog(@"这个是相机按钮");
+    //NSLog(@"这个是相机按钮");
+    if (self.cameraButtonBlock)
+    {
+        self.cameraButtonBlock();
+    }
 }
 
 
