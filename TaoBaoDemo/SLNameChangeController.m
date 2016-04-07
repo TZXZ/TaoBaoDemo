@@ -32,7 +32,7 @@
     _textFieldName = [[UITextField alloc] initWithFrame:CGRectMake(20, 100 + 30, WL - 40, 40)];
     _textFieldName.placeholder = @"请输入您的新用户名";
     _textFieldName.delegate = self;
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 39, 300, 1)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 39, WL - 40, 1)];
     line.backgroundColor = [UIColor grayColor];
     [_textFieldName addSubview:line];
     [_textFieldName addTarget:self action:@selector(textFieldNameChanging:) forControlEvents:UIControlEventEditingChanged];
@@ -77,6 +77,7 @@
     [self.view endEditing:YES];
     __weak NSString *strName = _textFieldName.text;
     NSString *strURL = [NSString stringWithFormat:@"http://42.96.178.214/php/updatename.php?name=%@&phone=%@",_textFieldName.text,[delegate.userInfomation phone]];
+    strURL = [strURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     NSURL *url = [NSURL URLWithString:strURL];
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)

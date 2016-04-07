@@ -199,9 +199,13 @@
                   NSURLSession *session1 = [NSURLSession sharedSession];
                   NSURLSessionDataTask *dataTask1 = [session1 dataTaskWithURL:url1 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                   {
-                      _image1 = [UIImage imageWithData:data];
+                      //_image1 = [UIImage imageWithData:data];
+                      //NSLog(@"获取第一张图片成功！");
+                      dispatch_async(dispatch_get_main_queue(), ^
+                                     {
+                                         viewForTableHead.imageView1.image = [UIImage imageWithData:data];
+                                     });
                       
-                      NSLog(@"获取第一张图片成功！");
                   }];
                   [dataTask1 resume];
                   
@@ -211,8 +215,12 @@
                   NSURLSession *session2 = [NSURLSession sharedSession];
                   NSURLSessionDataTask *dataTask2 = [session2 dataTaskWithURL:url2 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                  {
-                     _image2 = [UIImage imageWithData:data];
-                     NSLog(@"获取第二张图片成功！");
+                     //_image2 = [UIImage imageWithData:data];
+                     //NSLog(@"获取第二张图片成功！");
+                     dispatch_async(dispatch_get_main_queue(), ^
+                                    {
+                                        viewForTableHead.imageView2.image = [UIImage imageWithData:data];
+                                    });
                  }];
                   [dataTask2 resume];
                   
@@ -222,8 +230,12 @@
                   NSURLSession *session3 = [NSURLSession sharedSession];
                   NSURLSessionDataTask *dataTask3 = [session3 dataTaskWithURL:url3 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                  {
-                     _image3 = [UIImage imageWithData:data];
-                     NSLog(@"获取第三张图片成功！");
+                     //_image3 = [UIImage imageWithData:data];
+                     //NSLog(@"获取第三张图片成功！");
+                     dispatch_async(dispatch_get_main_queue(), ^
+                                    {
+                                        viewForTableHead.imageView3.image = [UIImage imageWithData:data];
+                                    });
                  }];
                   [dataTask3 resume];
                   
@@ -239,7 +251,7 @@
     //5.执行任务
     [dataTask resume];
     
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(soSlowToLoadMessage:) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(soSlowToLoadMessage:) userInfo:nil repeats:YES];
 }
 
 
@@ -258,23 +270,23 @@
         viewForTableHead.labelTest3.text = goodsYouSeeNow.addressState;
         
     }
-    if (_image1 != nil)
-    {
-        viewForTableHead.imageView1.image = _image1;
-    }
-    if (_image2 != nil)
-    {
-        viewForTableHead.imageView2.image = _image2;
-    }
-    if (_image3 != nil)
-    {
-        viewForTableHead.imageView3.image = _image3;
-    }
-    
-    if (goodsYouSeeNow.name != nil && _image1 != nil && _image2 != nil && _image3 != nil)
-    {
-        [timer invalidate];
-    }
+//    if (_image1 != nil)
+//    {
+//        viewForTableHead.imageView1.image = _image1;
+//    }
+//    if (_image2 != nil)
+//    {
+//        viewForTableHead.imageView2.image = _image2;
+//    }
+//    if (_image3 != nil)
+//    {
+//        viewForTableHead.imageView3.image = _image3;
+//    }
+//    
+//    if (goodsYouSeeNow.name != nil && _image1 != nil && _image2 != nil && _image3 != nil)
+//    {
+//        [timer invalidate];
+//    }
     
     
 }
