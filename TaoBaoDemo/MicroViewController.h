@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MicroViewController : UIViewController
+@interface MicroViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+
 
 @end

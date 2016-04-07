@@ -409,12 +409,28 @@
 - (void)addGoodsToCart:(NSString *)str                  //添加到购物车要显示的数组中去
 {
     NSLog(@"当前购买的商品数量是 %@",str);
+    
+    for (int i = 0; i < delegate.arrayForCart.count; i ++)
+    {
+        NSString *tempName = [[delegate.arrayForCart objectAtIndex:i] name];
+        //NSLog(@"tempName = %@",tempName);
+        
+        if ([tempName isEqualToString:goodsYouSeeNow.name])
+        {
+            SLGoodsDetail *goodsTemp = [delegate.arrayForCart objectAtIndex:i];
+            int newNumber = goodsTemp.countOfNeed + str.intValue;
+            goodsTemp.countOfNeed = newNumber;
+            [delegate.arrayForCart replaceObjectAtIndex:i withObject:goodsTemp];
+            
+            return;
+        }
+    }
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd";
     NSDate *date = [NSDate date];
     NSString *strDate = [dateFormatter stringFromDate:date];
     //NSLog(@"strDate = %@",strDate);
-    
     goodsYouSeeNow.dateStr = strDate;
     goodsYouSeeNow.countOfNeed = str.intValue;
     [delegate.arrayForCart addObject:goodsYouSeeNow];

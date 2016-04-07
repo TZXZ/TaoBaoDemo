@@ -8,6 +8,8 @@
 
 #import "DetaiViewController.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "SLVersionsInfoController.h"
+#import "SLNameChangeController.h"
 
 #define WL self.view.frame.size.width
 #define HL self.view.frame.size.height
@@ -24,7 +26,7 @@
     self.title = @"个人信息";
     self.view.frame = [[UIScreen mainScreen] bounds];
     appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    self.automaticallyAdjustsScrollViewInsets = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     //添加导航控制器上面的左侧返回button
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
@@ -33,10 +35,12 @@
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = leftBarButton;
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WL, HL) style:UITableViewStyleGrouped];
+    //初始化table view
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, WL, HL - 80) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.bounces = NO;
+    self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.tableView];
     
     //初始化退出当前用户的按钮
@@ -127,6 +131,8 @@
                 
             case 1:
                 cell.textLabel.text = @"版本信息";
+                cell.detailTextLabel.text = @"V 1.0.0";
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:14.0];
                 break;
                 
             default:
@@ -144,7 +150,7 @@
     }
     
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *imageName = [NSString stringWithFormat:@"%@.png",appDelegate.userInfomation.name];
+    NSString *imageName = [NSString stringWithFormat:@"%@.png",appDelegate.userInfomation.phone];
     NSString *filePath = [documentPath stringByAppendingPathComponent:imageName];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
@@ -222,14 +228,17 @@
         imagePickerController.delegate = self;
         imagePickerController.editing = YES;
         
+        if (indexPath.row == 1)
+        {
+            SLNameChangeController *nameChangeController = [[SLNameChangeController alloc] init];
+            [self.navigationController pushViewController:nameChangeController animated:YES];
+        }
+        
+        
         switch (indexPath.row)
         {
             case 0:
                 [self presentViewController:imagePickerController animated:YES completion:nil];
-                break;
-                
-            case 1:
-                NSLog(@"点击了淘宝昵称");
                 break;
                 
             case 2:
@@ -264,7 +273,7 @@
                            {
                                //清除缓存
                                NSString *catch = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-                               NSLog(@"catch = %@",catch);
+                               //NSLog(@"catch = %@",catch);          //沙盒里面缓存的文件路径
                                NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:catch];
                                fileCount = (int)[files count];
                                for (NSString *p in files)
@@ -278,14 +287,22 @@
                                }
                            });
             
-            [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(stopProgressAction:) userInfo:nil repeats:NO];
+            [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(stopProgressAction:) userInfo:nil repeats:NO];
         }
         else if (indexPath.row == 1)
         {
-            NSLog(@"这个是版本信息");
+            //NSLog(@"这个是版本信息");
+            SLVersionsInfoController *versionsController = [[SLVersionsInfoController alloc] init];
+            [self.navigationController pushViewController:versionsController animated:YES];
         }
     }
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 20.0;
+}
+
 
 - (void)stopProgressAction:(NSTimer *)timer
 {
@@ -303,7 +320,7 @@
     data = UIImagePNGRepresentation(image);
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSLog(@"documentPath = %@",documentPath);
-    NSString *imageName = [NSString stringWithFormat:@"%@.png",appDelegate.userInfomation.name];
+    NSString *imageName = [NSString stringWithFormat:@"%@.png",appDelegate.userInfomation.phone];
     NSString *filePath = [documentPath stringByAppendingPathComponent:imageName];
     [data writeToFile:filePath atomically:YES];
     appDelegate.userInfomation.imageName = imageName;

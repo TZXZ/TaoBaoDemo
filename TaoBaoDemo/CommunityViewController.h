@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CommunityViewController : UIViewController
+@interface CommunityViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 
 @end

@@ -74,7 +74,7 @@
     {
         self.labelUserName.text = delegate.userInfomation.name;
         NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        NSString *imageName = [NSString stringWithFormat:@"%@.png",delegate.userInfomation.name];
+        NSString *imageName = [NSString stringWithFormat:@"%@.png",delegate.userInfomation.phone];
         NSString *filePath = [documentPath stringByAppendingPathComponent:imageName];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if (delegate.userInfomation.imageName != nil || [fileManager fileExistsAtPath:filePath])

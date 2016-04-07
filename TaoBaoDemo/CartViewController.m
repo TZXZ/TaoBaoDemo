@@ -17,22 +17,6 @@
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 #define SCREEN_WIDTH  [[UIScreen mainScreen] bounds].size.width
 
-////16进制RGB的颜色转换
-//#define kUIColorFromRGB(rgbValue) [UIColor \
-//colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-//green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
-//blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-//
-////R G B 颜色
-//#define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
-//
-////红色
-//#define BASECOLOR_RED [UIColor \
-//colorWithRed:((float)((0xED5565 & 0xFF0000) >> 16))/255.0 \
-//green:((float)((0xED5565 & 0xFF00) >> 8))/255.0 \
-//blue:((float)(0xED5565 & 0xFF))/255.0 alpha:1.0]
-
-
 
 @interface CartViewController () <UITableViewDelegate, UITableViewDataSource>
 {
@@ -306,10 +290,20 @@
 
 - (void)goPayBtnClick         //提交订单按钮事件  待写...
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"支付功能正在开发中，请稍后再试" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好吧" style:UIAlertActionStyleDefault handler:nil];
-    [alertController addAction:okAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    if (numberOfmoneyNeedToPay == 0.0)
+    {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"请至少选择一件购物车里面的商品再进行付款" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"支付功能正在开发中，请稍后再试" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好吧" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 

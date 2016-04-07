@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="263" id="KGk-i7-Jjw" customClass="SLCommunityViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="416" height="263"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="416" height="262"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="community_hierarchy.png" translatesAutoresizingMaskIntoConstraints="NO" id="TGk-P3-gzE">
+                        <rect key="frame" x="103" y="13" width="18" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="18" id="LJK-be-xAR"/>
+                            <constraint firstAttribute="height" constant="18" id="mFw-6B-g9w"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="c***7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1E-2u-Dga">
+                        <rect key="frame" x="44" y="11" width="51" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="51" id="5N3-On-zhe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="community_headimg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="V2T-SB-vwO">
+                        <rect key="frame" x="8" y="8" width="28" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="28" id="qCG-4h-n72"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已经入手" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nW9-tR-gGe">
+                        <rect key="frame" x="8" y="59" width="48" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="8xU-bN-eTj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="1" green="0.32977506880868934" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="               键盘手感不错，看评价都说打字声音大，不过我觉得正好，声音清脆有节奏感，关键是我打lol的胜率一路飙升，附上我最近开黑战绩截图" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNh-QL-Hb0">
+                        <rect key="frame" x="8" y="50" width="391" height="75"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="community_img1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="OGs-6K-JeI">
+                        <rect key="frame" x="8" y="125" width="95" height="95"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="95" id="89i-8h-JR4"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="community_img3.png" translatesAutoresizingMaskIntoConstraints="NO" id="ggR-05-p62">
+                        <rect key="frame" x="214" y="125" width="95" height="95"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="来自" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfU-VZ-Cda">
+                        <rect key="frame" x="8" y="228" width="29" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.43944788873994634" green="0.43944788873994634" blue="0.43944788873994634" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全民晒单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRC-wv-GPG">
+                        <rect key="frame" x="42" y="228" width="55" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="community_msgimg.png" translatesAutoresizingMaskIntoConstraints="NO" id="sVb-kO-K0p">
+                        <rect key="frame" x="296" y="228" width="21" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="21" id="ueR-Sa-8NO"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="87" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erz-fR-LRj">
+                        <rect key="frame" x="317" y="228" width="21" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="21" id="T7d-AJ-52T"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="community_priseimg.png" translatesAutoresizingMaskIntoConstraints="NO" id="1EB-0I-CnS">
+                        <rect key="frame" x="357" y="228" width="21" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="21" id="Kl1-FB-Z9M"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxw-TC-bMw">
+                        <rect key="frame" x="378" y="228" width="21" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="21" id="VKJ-5R-nuB"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="community_img2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ddz-cL-on9">
+                        <rect key="frame" x="111" y="125" width="95" height="95"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="95" id="t4G-pC-cD9"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Ddz-cL-on9" firstAttribute="bottom" secondItem="OGs-6K-JeI" secondAttribute="bottom" id="001-8t-BpB"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Ddz-cL-on9" secondAttribute="bottom" constant="34" id="0hd-kQ-cQ8"/>
+                    <constraint firstItem="erz-fR-LRj" firstAttribute="firstBaseline" secondItem="nxw-TC-bMw" secondAttribute="firstBaseline" id="0nw-TH-srO"/>
+                    <constraint firstItem="v1E-2u-Dga" firstAttribute="leading" secondItem="V2T-SB-vwO" secondAttribute="trailing" constant="8" symbolic="YES" id="0te-6q-17a"/>
+                    <constraint firstItem="OGs-6K-JeI" firstAttribute="top" secondItem="Ddz-cL-on9" secondAttribute="top" id="4Tt-g0-Neg"/>
+                    <constraint firstItem="OGs-6K-JeI" firstAttribute="top" secondItem="nW9-tR-gGe" secondAttribute="bottom" constant="46" id="56m-eX-ars"/>
+                    <constraint firstItem="CRC-wv-GPG" firstAttribute="baseline" secondItem="sfU-VZ-Cda" secondAttribute="baseline" id="6Qn-NM-afa"/>
+                    <constraint firstItem="fNh-QL-Hb0" firstAttribute="top" secondItem="TGk-P3-gzE" secondAttribute="bottom" constant="19" id="7nb-pF-GQd"/>
+                    <constraint firstItem="sfU-VZ-Cda" firstAttribute="centerX" secondItem="V2T-SB-vwO" secondAttribute="centerX" id="Cmn-OU-HcE"/>
+                    <constraint firstItem="V2T-SB-vwO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="EfP-QQ-qUD"/>
+                    <constraint firstItem="erz-fR-LRj" firstAttribute="leading" secondItem="sVb-kO-K0p" secondAttribute="trailing" id="Ggc-qC-jdk"/>
+                    <constraint firstItem="nW9-tR-gGe" firstAttribute="top" secondItem="V2T-SB-vwO" secondAttribute="bottom" constant="23" id="Gn7-wT-pdz"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="sfU-VZ-Cda" secondAttribute="bottom" constant="5" id="Gxw-Rn-fJh"/>
+                    <constraint firstItem="sVb-kO-K0p" firstAttribute="top" secondItem="ggR-05-p62" secondAttribute="bottom" constant="8" symbolic="YES" id="HgL-rz-r70"/>
+                    <constraint firstItem="fNh-QL-Hb0" firstAttribute="trailing" secondItem="nxw-TC-bMw" secondAttribute="trailing" id="MEd-9u-QnV"/>
+                    <constraint firstItem="ggR-05-p62" firstAttribute="leading" secondItem="Ddz-cL-on9" secondAttribute="trailing" constant="8" symbolic="YES" id="Nqq-eo-yNu"/>
+                    <constraint firstItem="ggR-05-p62" firstAttribute="top" secondItem="Ddz-cL-on9" secondAttribute="top" id="Pps-h4-rQC"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ggR-05-p62" secondAttribute="trailing" constant="99" id="Q1O-bS-O27"/>
+                    <constraint firstItem="erz-fR-LRj" firstAttribute="firstBaseline" secondItem="CRC-wv-GPG" secondAttribute="firstBaseline" id="Rck-dz-2a1"/>
+                    <constraint firstItem="fNh-QL-Hb0" firstAttribute="top" secondItem="V2T-SB-vwO" secondAttribute="bottom" constant="14" id="Tj9-Lz-njZ"/>
+                    <constraint firstItem="1EB-0I-CnS" firstAttribute="top" secondItem="nxw-TC-bMw" secondAttribute="top" id="VDv-fU-vex"/>
+                    <constraint firstItem="nxw-TC-bMw" firstAttribute="bottom" secondItem="1EB-0I-CnS" secondAttribute="bottom" id="X5i-v3-GzF"/>
+                    <constraint firstItem="fNh-QL-Hb0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Yl9-b1-vv8"/>
+                    <constraint firstItem="fNh-QL-Hb0" firstAttribute="leading" secondItem="nW9-tR-gGe" secondAttribute="leading" id="abr-UE-qqK"/>
+                    <constraint firstItem="CRC-wv-GPG" firstAttribute="leading" secondItem="sfU-VZ-Cda" secondAttribute="trailing" constant="5" id="akE-AH-li9"/>
+                    <constraint firstItem="CRC-wv-GPG" firstAttribute="baseline" secondItem="erz-fR-LRj" secondAttribute="baseline" id="e3K-zo-tKp"/>
+                    <constraint firstItem="v1E-2u-Dga" firstAttribute="centerX" secondItem="CRC-wv-GPG" secondAttribute="centerX" id="eKc-Hb-qfg"/>
+                    <constraint firstItem="nW9-tR-gGe" firstAttribute="leading" secondItem="V2T-SB-vwO" secondAttribute="leading" id="iQH-Bs-3uT"/>
+                    <constraint firstItem="nxw-TC-bMw" firstAttribute="leading" secondItem="1EB-0I-CnS" secondAttribute="trailing" id="ifT-CW-nsb"/>
+                    <constraint firstItem="1EB-0I-CnS" firstAttribute="leading" secondItem="erz-fR-LRj" secondAttribute="trailing" constant="19" id="jqC-di-Sag"/>
+                    <constraint firstItem="CRC-wv-GPG" firstAttribute="firstBaseline" secondItem="sfU-VZ-Cda" secondAttribute="firstBaseline" id="kk2-j3-Zhd"/>
+                    <constraint firstItem="nxw-TC-bMw" firstAttribute="baseline" secondItem="erz-fR-LRj" secondAttribute="baseline" id="nEw-g1-nbp"/>
+                    <constraint firstItem="nW9-tR-gGe" firstAttribute="leading" secondItem="OGs-6K-JeI" secondAttribute="leading" id="nlY-fs-eNV"/>
+                    <constraint firstItem="sfU-VZ-Cda" firstAttribute="leading" secondItem="OGs-6K-JeI" secondAttribute="leading" id="o3U-V0-1Wy"/>
+                    <constraint firstItem="sfU-VZ-Cda" firstAttribute="top" secondItem="OGs-6K-JeI" secondAttribute="bottom" constant="8" symbolic="YES" id="oJa-gI-AXN"/>
+                    <constraint firstItem="OGs-6K-JeI" firstAttribute="top" secondItem="fNh-QL-Hb0" secondAttribute="bottom" id="p9J-X0-6UR"/>
+                    <constraint firstItem="fNh-QL-Hb0" firstAttribute="top" secondItem="v1E-2u-Dga" secondAttribute="bottom" constant="18" id="un3-6j-VCW"/>
+                    <constraint firstItem="erz-fR-LRj" firstAttribute="bottom" secondItem="sVb-kO-K0p" secondAttribute="bottom" id="v1G-Iy-sLM"/>
+                    <constraint firstItem="v1E-2u-Dga" firstAttribute="centerY" secondItem="V2T-SB-vwO" secondAttribute="centerY" id="vO9-2k-U4Y"/>
+                    <constraint firstItem="v1E-2u-Dga" firstAttribute="centerY" secondItem="TGk-P3-gzE" secondAttribute="centerY" id="whU-dS-KMm"/>
+                    <constraint firstItem="erz-fR-LRj" firstAttribute="top" secondItem="sVb-kO-K0p" secondAttribute="top" id="xF4-3Z-D49"/>
+                    <constraint firstItem="TGk-P3-gzE" firstAttribute="leading" secondItem="v1E-2u-Dga" secondAttribute="trailing" constant="8" symbolic="YES" id="xgi-7L-Ivs"/>
+                    <constraint firstItem="Ddz-cL-on9" firstAttribute="leading" secondItem="OGs-6K-JeI" secondAttribute="trailing" constant="8" symbolic="YES" id="yVI-5t-ve3"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="fNh-QL-Hb0" secondAttribute="trailing" constant="9" id="zpK-D9-ZsH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imageHead" destination="V2T-SB-vwO" id="eEP-we-Zmn"/>
+            </connections>
+            <point key="canvasLocation" x="468" y="429.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="community_headimg.jpg" width="1024" height="1024"/>
+        <image name="community_hierarchy.png" width="32" height="32"/>
+        <image name="community_img1.jpg" width="800" height="800"/>
+        <image name="community_img2.png" width="741" height="717"/>
+        <image name="community_img3.png" width="960" height="720"/>
+        <image name="community_msgimg.png" width="32" height="32"/>
+        <image name="community_priseimg.png" width="32" height="32"/>
+    </resources>
+</document>

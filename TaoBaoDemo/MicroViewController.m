@@ -7,6 +7,7 @@
 //
 
 #import "MicroViewController.h"
+#import "SLMicroViewCell.h"
 
 @interface MicroViewController ()
 
@@ -14,24 +15,54 @@
 
 @implementation MicroViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-//     Do any additional setup after loading the view from its nib.
+    
+//初始化table view
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark -- table view dataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 8;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellID = @"cellID";
+    UINib *nib = [UINib nibWithNibName:@"SLMicroViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:cellID];
+    SLMicroViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    return cell;
+}
+
+
+#pragma mark -- table view delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 252.0;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
 
 @end

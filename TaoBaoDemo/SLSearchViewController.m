@@ -67,7 +67,7 @@
 
 - (void)getAllGoodsInfoFromServer         //从服务器获取所有的商品信息
 {
-    NSString *strURL = @"http://localhost/queryA.php";
+    NSString *strURL = @"http://42.96.178.214/php/queryA.php";          //待会记得放到服务器上面去
     NSURL *url = [NSURL URLWithString:strURL];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -135,7 +135,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
     
-    cell.textLabel.text = @"我是商品";
+    //cell.textLabel.text = @"我是商品";
     
     if (_dicGoodsInfo)
     {
@@ -188,7 +188,7 @@
         }
     }
     
-    NSLog(@"遍历完成");
+    //NSLog(@"遍历完成");
     [self.tableView reloadData];
 }
 
