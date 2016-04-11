@@ -1,14 +1,13 @@
 # TaoBaoDemo (微淘购物)
 
-项目名称：微淘购物
+项目名称：微淘购物  <br>
+开发环境：Xcode7.2、Apache、MySQL  <br>
+开发语言：Objective-C  <br>
+适配情况：基本适应4英寸以以上尺寸的手机（纯代码界面frame约束，xib界面利用AutoLayout 和sizeClass 约束）
 
-开发环境：Xcode7.2、Apache、MySQL
-
-开发语言：Objective-C
-
-适配情况：基本适应4英寸以以上尺寸的手机
-
-
+<br>
+<br>
+<br>
 项目简介
 --
 该项目是模仿市面上的淘宝移动客户端开发的，主要分5大功能模块
@@ -22,6 +21,34 @@
 ##### 模块4—购物车：当用户添加至购物车的商品都会在这里显示，用户可以选择一个或多个进行集中付款
               
 ##### 模块5—我的淘宝：用户管理个人信息以及查看订单状态等其他一些操作的模块
+
+<br>
+<br>
+<br/>
+<br>
+项目功能模块图
+--
+![github](http://42.96.178.214/img_for_github/project_image.png "只是大体的展示一下")
+
+<br>
+<br>
+<br>
+
+#模块一：首页
+*先贴几张效果图*
+<br>
+![github](http://42.96.178.214/img_for_github/weitao_main_1.png)  ![github](http://42.96.178.214/img_for_github/weitao_main_2.png)<br>
+
+<br>
+![github](http://42.96.178.214/img_for_github/weitao_main_3.png) ![](http://42.96.178.214/img_for_github/weitao_main_4.png "搜索页面")
+<br>
+<br>
+
+首页的布局
+
+
+
+
 
 
 
