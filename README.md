@@ -1,4 +1,4 @@
-# TaoBaoDemo (微淘购物)  ![](http://42.96.178.214/img_for_github/weitao_icon.jpg)
+# ![](http://42.96.178.214/img_for_github/weitao_icon.jpg) TaoBaoDemo (微淘购物)
 
 项目名称：微淘购物  <br>
 开发环境：Xcode7.2、Apache、MySQL  <br>
